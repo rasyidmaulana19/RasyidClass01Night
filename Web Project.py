@@ -271,18 +271,18 @@ elif halaman == "👥 Anggota Tim":
         display_member_photo(foto_rasyid, "Rasyid Irvan Maulana")
         st.markdown("<h3>Rasyid Irvan Maulana</h3><p style='font-weight: bold; color: #fbbf24;'>Ketua Proyek & Pengembang Backend</p><p style='font-size: 0.9rem;'>Integrasi API, algoritma turunan, arsitektur sistem</p></div>", unsafe_allow_html=True)
     with col2:
-        st.markdown("""<div style='background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 2rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
+        st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
         display_member_photo(foto_luthfi, "Luthfi Ilham Pratama")
         st.markdown("<h3>Luthfi Ilham Pratama</h3><p style='font-weight: bold; color: #fbbf24;'>Pengembang Frontend</p><p style='font-size: 0.9rem;'>Desain UI/UX, komponen Streamlit, visualisasi</p></div>", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     col3, col4 = st.columns(2)
     with col3:
-        st.markdown("""<div style='background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 2rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
+        st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
         display_member_photo(foto_andrian, "Andrian Ramadhan")
         st.markdown("<h3>Andrian Ramadhan</h3><p style='font-weight: bold; color: #fbbf24;'>Spesialis Matematika</p><p style='font-size: 0.9rem;'>Algoritma optimasi, validasi matematis, pengujian</p></div>", unsafe_allow_html=True)
     with col4:
-        st.markdown("""<div style='background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); padding: 2rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
+        st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
         display_member_photo(foto_restu, "Restu Imam F")
         st.markdown("<h3>Restu Imam F</h3><p style='font-weight: bold; color: #fbbf24;'>Spesialis Matematika</p><p style='font-size: 0.9rem;'>Algoritma optimasi, validasi matematis, pengujian</p></div>", unsafe_allow_html=True)
 
