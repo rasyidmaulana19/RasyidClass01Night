@@ -10,7 +10,7 @@ import base64
 
 # ---------------- Page config ----------------
 st.set_page_config(
-    page_title="Aplikasi Fungsi Matematika & Optimasi",
+    page_title="Mathematical Functions & Optimization App",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -125,21 +125,21 @@ section[data-testid="stSidebar"] {
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------- Helper fungsi ----------------
+# ---------------- Helper functions ----------------
 def display_member_photo(uploaded_file, name):
-    """Tampilkan foto anggota atau placeholder jika None."""
+    """Display member photo or placeholder if None."""
     if uploaded_file is not None:
         try:
-            # Pastikan pointer file di awal
+            # Ensure file pointer is at the beginning
             if hasattr(uploaded_file, "seek"):
                 uploaded_file.seek(0)
             image = Image.open(uploaded_file)
             
-            # Convert ke RGB jika perlu
+            # Convert to RGB if needed
             if image.mode != 'RGB':
                 image = image.convert('RGB')
             
-            # Buat gambar berbentuk lingkaran
+            # Create circular image
             size = min(image.size)
             image = image.crop(((image.width - size) // 2, 
                                (image.height - size) // 2,
@@ -149,17 +149,17 @@ def display_member_photo(uploaded_file, name):
             # Resize
             image.thumbnail((300, 300))
             
-            # Buat mask lingkaran
+            # Create circular mask
             mask = Image.new('L', image.size, 0)
             draw = ImageDraw.Draw(mask)
             draw.ellipse((0, 0) + image.size, fill=255)
             
-            # Terapkan mask
+            # Apply mask
             output = Image.new('RGBA', image.size, (0, 0, 0, 0))
             output.paste(image, (0, 0))
             output.putalpha(mask)
             
-            # Convert ke base64 untuk display dengan CSS
+            # Convert to base64 for display with CSS
             buffered = io.BytesIO()
             output.save(buffered, format="PNG")
             img_str = base64.b64encode(buffered.getvalue()).decode()
@@ -173,7 +173,7 @@ def display_member_photo(uploaded_file, name):
             </div>
             """, unsafe_allow_html=True)
         except Exception as e:
-            st.error(f"Gagal menampilkan gambar {name}: {e}")
+            st.error(f"Failed to display image for {name}: {e}")
     else:
         st.markdown(f"""
         <div style='width: 200px; height: 200px; background: linear-gradient(135deg, #667eea, #764ba2); 
@@ -184,24 +184,24 @@ def display_member_photo(uploaded_file, name):
         </div>
         """, unsafe_allow_html=True)
 
-# ---------------- Sidebar navigasi ----------------
-st.sidebar.title("📋 Navigasi")
-halaman = st.sidebar.radio(
-    "Pilih Halaman:",
-    ["🏠 Beranda", "👥 Anggota Tim", "📈 Analisis Fungsi", "🎯 Pemecah Optimasi"]
+# ---------------- Sidebar navigation ----------------
+st.sidebar.title("📋 Navigation")
+page = st.sidebar.radio(
+    "Choose Page:",
+    ["🏠 Home", "👥 Team Members", "📈 Function Analysis", "🎯 Optimization Solver"]
 )
 
 # ---------------- Footer sidebar info ----------------
 st.sidebar.markdown("---")
-st.sidebar.markdown("### 📚 Tentang")
+st.sidebar.markdown("### 📚 About")
 st.sidebar.info("""
-Aplikasi ini mendemonstrasikan:
-- Visualisasi fungsi
-- Diferensiasi simbolik
-- Pemecahan masalah optimasi
-- Alat matematika interaktif
+This application demonstrates:
+- Function visualization
+- Symbolic differentiation
+- Optimization problem solving
+- Interactive mathematical tools
 """)
-st.sidebar.markdown("### 🛠️ Teknologi")
+st.sidebar.markdown("### 🛠️ Technologies")
 st.sidebar.markdown("""
 - Python
 - Streamlit
@@ -211,262 +211,261 @@ st.sidebar.markdown("""
 - PIL (Image Processing)
 """)
 
-# ================== HALAMAN 1: BERANDA ==================
-if halaman == "🏠 Beranda":
-    st.title("🎓 Aplikasi Web Fungsi Matematika & Optimasi")
-    st.markdown("### Platform Alat Kalkulus Lanjutan & Pemecahan Masalah")
+# ================== PAGE 1: HOME ==================
+if page == "🏠 Home":
+    st.title("🎓 Mathematical Functions & Optimization Web App")
+    st.markdown("### Advanced Calculus Tools & Problem Solving Platform")
     
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("""
         <div style='background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);'>
-            <h3 style='text-align: center;'>👥 Anggota Tim</h3>
-            <p style='text-align: center; color: #6b7280;'>Kenali tim pengembang dan kontribusi mereka</p>
+            <h3 style='text-align: center;'>👥 Team Members</h3>
+            <p style='text-align: center; color: #6b7280;'>Meet the development team and their contributions</p>
         </div>
         """, unsafe_allow_html=True)
     with col2:
         st.markdown("""
         <div style='background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);'>
-            <h3 style='text-align: center;'>📈 Analisis Fungsi</h3>
-            <p style='text-align: center; color: #6b7280;'>Visualisasikan fungsi dan hitung turunannya</p>
+            <h3 style='text-align: center;'>📈 Function Analysis</h3>
+            <p style='text-align: center; color: #6b7280;'>Visualize functions and compute derivatives</p>
         </div>
         """, unsafe_allow_html=True)
     with col3:
         st.markdown("""
         <div style='background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);'>
-            <h3 style='text-align: center;'>🎯 Optimasi</h3>
-            <p style='text-align: center; color: #6b7280;'>Selesaikan soal cerita langkah demi langkah</p>
+            <h3 style='text-align: center;'>🎯 Optimization</h3>
+            <p style='text-align: center; color: #6b7280;'>Solve word problems step by step</p>
         </div>
         """, unsafe_allow_html=True)
     st.markdown("---")
-    st.markdown("### 🚀 Fitur-fitur")
+    st.markdown("### 🚀 Features")
     st.markdown("""
-    - ✅ **Visualisasi Fungsi**: Plot fungsi matematika apapun
-    - ✅ **Komputasi Turunan**: Diferensiasi langkah demi langkah dengan tampilan LaTeX
-    - ✅ **Pemecah Optimasi**: Selesaikan masalah optimasi dunia nyata
-    - ✅ **Plot Interaktif**: Visualisasi dinamis dan responsif
+    - ✅ **Function Visualization**: Plot any mathematical function
+    - ✅ **Derivative Computation**: Step-by-step differentiation with LaTeX display
+    - ✅ **Optimization Solver**: Solve real-world optimization problems
+    - ✅ **Interactive Plots**: Dynamic and responsive visualizations
     """)
 
-# ================== HALAMAN 2: ANGGOTA TIM ==================
-elif halaman == "👥 Anggota Tim":
-    st.title("👥 Tim Pengembang Kami")
-    st.markdown("### Kenali orang-orang di balik proyek ini")
+# ================== PAGE 2: TEAM MEMBERS ==================
+elif page == "👥 Team Members":
+    st.title("👥 Our Development Team")
+    st.markdown("### Meet the people behind this project")
     
     # Upload photos
     st.markdown("---")
-    with st.expander("📸 Upload Foto Anggota Tim", expanded=False):
-        st.markdown("**Upload foto untuk setiap anggota tim:**")
+    with st.expander("📸 Upload Team Member Photos", expanded=False):
+        st.markdown("**Upload a photo for each team member:**")
         col_upload1, col_upload2 = st.columns(2)
         with col_upload1:
-            foto_rasyid = st.file_uploader("Foto Rasyid Irvan Maulana", type=['png', 'jpg', 'jpeg'], key="foto1")
-            foto_luthfi = st.file_uploader("Foto Luthfi Ilham Pratama", type=['png', 'jpg', 'jpeg'], key="foto2")
+            photo_rasyid = st.file_uploader("Rasyid Irvan Maulana's Photo", type=['png', 'jpg', 'jpeg'], key="photo1")
+            photo_luthfi = st.file_uploader("Luthfi Ilham Pratama's Photo", type=['png', 'jpg', 'jpeg'], key="photo2")
         with col_upload2:
-            foto_andrian = st.file_uploader("Foto Andrian Ramadhan", type=['png', 'jpg', 'jpeg'], key="foto3")
-            foto_restu = st.file_uploader("Foto Restu Imam Fakhrezi", type=['png', 'jpg', 'jpeg'], key="foto4")
+            photo_andrian = st.file_uploader("Andrian Ramadhan's Photo", type=['png', 'jpg', 'jpeg'], key="photo3")
+            photo_restu = st.file_uploader("Restu Imam Fakhrezi's Photo", type=['png', 'jpg', 'jpeg'], key="photo4")
     
     st.markdown("---")
     col1, col2 = st.columns(2)
     with col1:
         st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
-        display_member_photo(foto_rasyid, "Rasyid Irvan Maulana")
+        display_member_photo(photo_rasyid, "Rasyid Irvan Maulana")
         st.markdown("<h3>Rasyid Irvan Maulana</h3><p style='font-weight: bold; color: #fbbf24;'>Project Lead • Backend Architect</p><p style='font-size: 0.9rem;'>Crafts the core system architecture and backend infrastructure that drive the entire platform. Leads API integration, develops derivative logic, and ensures all system components operate consistently and efficiently.</p></div>", unsafe_allow_html=True)
     with col2:
         st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
-        display_member_photo(foto_luthfi, "Luthfi Ilham Pratama")
+        display_member_photo(photo_luthfi, "Luthfi Ilham Pratama")
         st.markdown("<h3>Luthfi Ilham Pratama</h3><p style='font-weight: bold; color: #fbbf24;'>Frontend Engineer • UI/UX Designer</p><p style='font-size: 0.9rem;'>Designs intuitive, user-centered interfaces with modern and responsive layouts. Creates elegant Streamlit components and visual elements that enhance usability across devices.</p></div>", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     col3, col4 = st.columns(2)
     with col3:
         st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
-        display_member_photo(foto_andrian, "Andrian Ramadhan")
+        display_member_photo(photo_andrian, "Andrian Ramadhan")
         st.markdown("<h3>Andrian Ramadhan</h3><p style='font-weight: bold; color: #fbbf24;'>Algorithm & Mathematics Engineer</p><p style='font-size: 0.9rem;'>Translates complex mathematical concepts into precise and optimized algorithms. Validates models, refines derivative computations, and ensures mathematical accuracy throughout the application.</p></div>", unsafe_allow_html=True)
     with col4:
         st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
-        display_member_photo(foto_restu, "Restu Imam Fakhrezi")
+        display_member_photo(photo_restu, "Restu Imam Fakhrezi")
         st.markdown("<h3>Restu Imam Fakhrezi</h3><p style='font-weight: bold; color: #fbbf24;'>Computational Mathematics Engineer</p><p style='font-size: 0.9rem;'>Analyzes mathematical formulations to ensure reliability and correctness. Develops optimization approaches, validates computational results, and stress-tests algorithm performance under diverse inputs.</p></div>", unsafe_allow_html=True)
 
-# ================== HALAMAN 3: ANALISIS FUNGSI ==================
-elif halaman == "📈 Analisis Fungsi":
-    st.title("📈 Visualisasi Fungsi & Diferensiasi")
+# ================== PAGE 3: FUNCTION ANALYSIS ==================
+elif page == "📈 Function Analysis":
+    st.title("📈 Function Visualization & Differentiation")
     
-    st.markdown("### 🔢 Masukkan Fungsi Matematika")
+    st.markdown("### 🔢 Enter a Mathematical Function")
     col1, col2 = st.columns([3, 1])
     with col1:
-        input_fungsi = st.text_input(
-            "Fungsi (gunakan x sebagai variabel):",
+        input_function = st.text_input(
+            "Function (use x as variable):",
             value="x**2 + 3*x + 2",
-            help="Contoh: x**2, sin(x), exp(x), x**3 - 2*x"
+            help="Examples: x**2, sin(x), exp(x), x**3 - 2*x"
         )
     with col2:
-        rentang_x = st.slider("Rentang Plot", -20, 20, (-10, 10))
+        x_range = st.slider("Plot Range", -20, 20, (-10, 10))
     
     try:
         x = symbols('x')
-        ekspresi_fungsi = sympify(input_fungsi)
-        st.markdown("### 📝 Tampilan Fungsi")
-        st.latex(f"f(x) = {latex(ekspresi_fungsi)}")
+        function_expr = sympify(input_function)
+        st.markdown("### 📝 Function Display")
+        st.latex(f"f(x) = {latex(function_expr)}")
     except Exception as e:
-        st.error(f"❌ Error parsing fungsi: {e}")
-        st.info("Gunakan sintaks Python/SymPy, contoh: x**2, sin(x), exp(x).")
-        ekspresi_fungsi = None
+        st.error(f"❌ Error parsing function: {e}")
+        st.info("Use Python/SymPy syntax, examples: x**2, sin(x), exp(x).")
+        function_expr = None
 
-    if ekspresi_fungsi is not None:
-        if st.button("🧮 Hitung Turunan", key="hitung_turunan"):
+    if function_expr is not None:
+        if st.button("🧮 Calculate Derivative", key="calc_derivative"):
             st.markdown("---")
-            st.markdown("### 📊 Turunan Langkah demi Langkah")
+            st.markdown("### 📊 Step-by-Step Derivative")
             try:
-                turunan = diff(ekspresi_fungsi, x)
-                with st.expander("📖 Langkah-langkah Diferensiasi", expanded=True):
-                    st.markdown("**Langkah 1:** Identifikasi fungsi yang akan diturunkan")
-                    st.latex(f"f(x) = {latex(ekspresi_fungsi)}")
-                    st.markdown("**Langkah 2:** Terapkan aturan diferensiasi")
-                    if ekspresi_fungsi.is_polynomial():
-                        st.markdown("- Menggunakan **Aturan Pangkat**: $\\frac{d}{dx}[x^n] = nx^{n-1}$")
-                    if ekspresi_fungsi.has(sp.sin) or ekspresi_fungsi.has(sp.cos):
-                        st.markdown("- Menggunakan **Aturan Trigonometri**")
-                    if ekspresi_fungsi.has(sp.exp):
-                        st.markdown("- Menggunakan **Aturan Eksponensial**: $\\frac{d}{dx}[e^x] = e^x$")
-                    st.markdown("**Langkah 3:** Sederhanakan hasilnya")
-                    turunan_sederhana = simplify(turunan)
-                    st.markdown("**Langkah 4:** Turunan akhir")
-                    st.latex(f"f'(x) = {latex(turunan_sederhana)}")
-                st.success("✅ Turunan Berhasil Dihitung!")
-                st.markdown("### 🎯 Hasil Akhir")
-                st.latex(f"\\boxed{{f'(x) = {latex(turunan_sederhana)}}}")
+                derivative = diff(function_expr, x)
+                with st.expander("📖 Differentiation Steps", expanded=True):
+                    st.markdown("**Step 1:** Identify the function to differentiate")
+                    st.latex(f"f(x) = {latex(function_expr)}")
+                    st.markdown("**Step 2:** Apply differentiation rules")
+                    if function_expr.is_polynomial():
+                        st.markdown("- Using **Power Rule**: $\\frac{d}{dx}[x^n] = nx^{n-1}$")
+                    if function_expr.has(sp.sin) or function_expr.has(sp.cos):
+                        st.markdown("- Using **Trigonometric Rules**")
+                    if function_expr.has(sp.exp):
+                        st.markdown("- Using **Exponential Rule**: $\\frac{d}{dx}[e^x] = e^x$")
+                    st.markdown("**Step 3:** Simplify the result")
+                    simplified_derivative = simplify(derivative)
+                    st.markdown("**Step 4:** Final derivative")
+                    st.latex(f"f'(x) = {latex(simplified_derivative)}")
+                st.success("✅ Derivative Successfully Calculated!")
+                st.markdown("### 🎯 Final Result")
+                st.latex(f"\\boxed{{f'(x) = {latex(simplified_derivative)}}}")
             except Exception as e:
-                st.error(f"Gagal menghitung turunan: {e}")
-                turunan = None
+                st.error(f"Failed to calculate derivative: {e}")
+                derivative = None
 
-            # Plot fungsi dan turunan (jika tersedia)
+            # Plot function and derivative (if available)
             st.markdown("---")
-            st.markdown("### 📊 Visualisasi")
+            st.markdown("### 📊 Visualization")
             colp1, colp2 = st.columns(2)
-            nilai_x = np.linspace(rentang_x[0], rentang_x[1], 400)
+            x_values = np.linspace(x_range[0], x_range[1], 400)
             
-            # plot fungsi asli
+            # plot original function
             with colp1:
-                st.markdown("#### Fungsi Asli f(x)")
+                st.markdown("#### Original Function f(x)")
                 try:
-                    f_lambda = sp.lambdify(x, ekspresi_fungsi, 'numpy')
-                    nilai_y = f_lambda(nilai_x)
+                    f_lambda = sp.lambdify(x, function_expr, 'numpy')
+                    y_values = f_lambda(x_values)
                     fig1 = go.Figure()
-                    fig1.add_trace(go.Scatter(x=nilai_x, y=nilai_y, mode='lines', name='f(x)', line=dict(width=3)))
-                    fig1.update_layout(title="Fungsi Asli", xaxis_title="x", yaxis_title="f(x)", hovermode='x', template='plotly_white')
+                    fig1.add_trace(go.Scatter(x=x_values, y=y_values, mode='lines', name='f(x)', line=dict(width=3)))
+                    fig1.update_layout(title="Original Function", xaxis_title="x", yaxis_title="f(x)", hovermode='x', template='plotly_white')
                     st.plotly_chart(fig1, use_container_width=True)
                 except Exception:
-                    st.error("Tidak dapat memplot fungsi ini dalam rentang yang diberikan.")
-            # plot turunan
+                    st.error("Cannot plot this function in the given range.")
+            # plot derivative
             with colp2:
-                st.markdown("#### Turunan f'(x)")
+                st.markdown("#### Derivative f'(x)")
                 try:
-                    if 'turunan' in locals() and turunan is not None:
-                        turunan_lambda = sp.lambdify(x, turunan, 'numpy')
-                        nilai_dy = turunan_lambda(nilai_x)
+                    if 'derivative' in locals() and derivative is not None:
+                        derivative_lambda = sp.lambdify(x, derivative, 'numpy')
+                        dy_values = derivative_lambda(x_values)
                         fig2 = go.Figure()
-                        fig2.add_trace(go.Scatter(x=nilai_x, y=nilai_dy, mode='lines', name="f'(x)", line=dict(width=3)))
-                        fig2.update_layout(title="Fungsi Turunan", xaxis_title="x", yaxis_title="f'(x)", hovermode='x', template='plotly_white')
+                        fig2.add_trace(go.Scatter(x=x_values, y=dy_values, mode='lines', name="f'(x)", line=dict(width=3)))
+                        fig2.update_layout(title="Derivative Function", xaxis_title="x", yaxis_title="f'(x)", hovermode='x', template='plotly_white')
                         st.plotly_chart(fig2, use_container_width=True)
                     else:
-                        st.info("Tekan tombol 'Hitung Turunan' terlebih dahulu untuk melihat plot turunan.")
+                        st.info("Press 'Calculate Derivative' button first to see the derivative plot.")
                 except Exception:
-                    st.error("Tidak dapat memplot turunan dalam rentang yang diberikan.")
+                    st.error("Cannot plot the derivative in the given range.")
 
-# ================== HALAMAN 4: OPTIMASI ==================
-elif halaman == "🎯 Pemecah Optimasi":
-    st.title("🎯 Pemecah Soal Cerita Optimasi")
-    st.markdown("### 📝 Masukkan Masalah Optimasi Anda")
+# ================== PAGE 4: OPTIMIZATION ==================
+elif page == "🎯 Optimization Solver":
+    st.title("🎯 Optimization Word Problem Solver")
+    st.markdown("### 📝 Enter Your Optimization Problem")
     
-    contoh_masalah = {
-        "Luas Persegi Panjang (Kendala Keliling)": {
-            "masalah": "Seorang petani memiliki 40 meter pagar untuk memagari area persegi panjang. Dimensi apa yang akan memaksimalkan luas yang dipagari?",
-            "tipe_solusi": "persegi_panjang_keliling"
+    example_problems = {
+        "Rectangle Area (Perimeter Constraint)": {
+            "problem": "A farmer has 40 meters of fencing to enclose a rectangular area. What dimensions will maximize the enclosed area?",
+            "solution_type": "rectangle_perimeter"
         },
-        "Volume Kotak (Luas Permukaan)": {
-            "masalah": "Sebuah kotak terbuka dibuat dari selembar karton persegi berukuran 12 inci pada setiap sisi dengan memotong persegi yang sama dari sudut dan melipat sisi ke atas. Temukan ukuran persegi sudut yang memaksimalkan volume.",
-            "tipe_solusi": "volume_kotak"
+        "Box Volume (Surface Area)": {
+            "problem": "An open box is made from a square sheet of cardboard 12 inches on each side by cutting equal squares from the corners and folding up the sides. Find the size of the corner squares that maximizes the volume.",
+            "solution_type": "box_volume"
         },
-        "Optimasi Produk": {
-            "masalah": "Temukan dua bilangan positif yang jumlahnya 50 dan produknya maksimum.",
-            "tipe_solusi": "jumlah_produk"
+        "Product Optimization": {
+            "problem": "Find two positive numbers whose sum is 50 and whose product is maximum.",
+            "solution_type": "sum_product"
         }
     }
-    pilihan_contoh = st.selectbox("Pilih contoh atau masukkan sendiri:", ["Masalah Kustom"] + list(contoh_masalah.keys()))
-    if pilihan_contoh == "Masalah Kustom":
-        teks_masalah = st.text_area("Masukkan soal cerita:", height=150, placeholder="Deskripsikan masalah optimasi Anda di sini...")
+    example_choice = st.selectbox("Select example or enter your own:", ["Custom Problem"] + list(example_problems.keys()))
+    if example_choice == "Custom Problem":
+        problem_text = st.text_area("Enter word problem:", height=150, placeholder="Describe your optimization problem here...")
     else:
-        teks_masalah = st.text_area("Masalah:", value=contoh_masalah[pilihan_contoh]["masalah"], height=150)
+        problem_text = st.text_area("Problem:", value=example_problems[example_choice]["problem"], height=150)
 
-    if st.button("🔍 Selesaikan Masalah Optimasi"):
-        if teks_masalah:
+    if st.button("🔍 Solve Optimization Problem"):
+        if problem_text:
             st.markdown("---")
-            st.markdown("### 🧮 Solusi")
-            if pilihan_contoh == "Luas Persegi Panjang (Kendala Keliling)":
-                with st.expander("📋 Solusi Langkah demi Langkah", expanded=True):
-                    st.markdown("**Langkah 1: Definisikan Variabel**")
-                    st.markdown("- Misalkan $x$ = panjang persegi panjang")
-                    st.markdown("- Misalkan $y$ = lebar persegi panjang")
-                    st.markdown("- Kendala keliling: $2x + 2y = 40$")
-                    st.markdown("**Langkah 2: Ekspresikan Fungsi Objektif**")
-                    st.markdown("- Objektif: Maksimalkan Luas $A = xy$")
-                    st.markdown("- Dari kendala: $y = 20 - x$")
-                    st.markdown("- Substitusi: $A(x) = x(20-x) = 20x - x^2$")
+            st.markdown("### 🧮 Solution")
+            if example_choice == "Rectangle Area (Perimeter Constraint)":
+                with st.expander("📋 Step-by-Step Solution", expanded=True):
+                    st.markdown("**Step 1: Define Variables**")
+                    st.markdown("- Let $x$ = length of rectangle")
+                    st.markdown("- Let $y$ = width of rectangle")
+                    st.markdown("- Perimeter constraint: $2x + 2y = 40$")
+                    st.markdown("**Step 2: Express Objective Function**")
+                    st.markdown("- Objective: Maximize Area $A = xy$")
+                    st.markdown("- From constraint: $y = 20 - x$")
+                    st.markdown("- Substitution: $A(x) = x(20-x) = 20x - x^2$")
                     st.latex("A(x) = 20x - x^2")
-                    st.markdown("**Langkah 3: Temukan Titik Kritis**")
-                    st.markdown("- Ambil turunan: $A'(x) = 20 - 2x$")
+                    st.markdown("**Step 3: Find Critical Points**")
+                    st.markdown("- Take derivative: $A'(x) = 20 - 2x$")
                     st.latex("A'(x) = 20 - 2x")
-                    st.markdown("- Set sama dengan nol: $20 - 2x = 0$ -> $x = 10$")
-                    st.markdown("**Langkah 4: Verifikasi Maksimum**")
-                    st.markdown("- $A''(x) = -2 < 0$ -> maksimum")
-                    st.markdown("**Langkah 5: Hitung Luas Maksimum**")
-                    st.markdown("- Luas Maksimum = $10 \\times 10 = 100$ meter persegi")
-                st.success("✅ **Solusi:** Persegi panjang harus berbentuk persegi sisi 10 m, luas 100 m².")
+                    st.markdown("- Set equal to zero: $20 - 2x = 0$ -> $x = 10$")
+                    st.markdown("**Step 4: Verify Maximum**")
+                    st.markdown("- $A''(x) = -2 < 0$ -> maximum")
+                    st.markdown("**Step 5: Calculate Maximum Area**")
+                    st.markdown("- Maximum Area = $10 \\times 10 = 100$ square meters")
+                st.success("✅ **Solution:** The rectangle should be a square with sides of 10 m, area 100 m².")
                 # Plot
-                nilai_x = np.linspace(0, 20, 200)
-                nilai_luas = nilai_x * (20 - nilai_x)
+                x_values = np.linspace(0, 20, 200)
+                area_values = x_values * (20 - x_values)
                 fig = go.Figure()
-                fig.add_trace(go.Scatter(x=nilai_x, y=nilai_luas, mode='lines', name='Luas', line=dict(width=3)))
-                fig.add_trace(go.Scatter(x=[10], y=[100], mode='markers', name='Maksimum', marker=dict(size=15, symbol='star')))
-                fig.update_layout(title="Luas vs. Panjang", xaxis_title="Panjang (x) dalam meter", yaxis_title="Luas (m²)", hovermode='x', template='plotly_white')
+                fig.add_trace(go.Scatter(x=x_values, y=area_values, mode='lines', name='Area', line=dict(width=3)))
+                fig.add_trace(go.Scatter(x=[10], y=[100], mode='markers', name='Maximum', marker=dict(size=15, symbol='star')))
+                fig.update_layout(title="Area vs. Length", xaxis_title="Length (x) in meters", yaxis_title="Area (m²)", hovermode='x', template='plotly_white')
                 st.plotly_chart(fig, use_container_width=True)
-            elif pilihan_contoh == "Optimasi Produk":
-                with st.expander("📋 Solusi Langkah demi Langkah", expanded=True):
-                    st.markdown("**Langkah 1: Definisikan Variabel**")
-                    st.markdown("- Misalkan $x$ = bilangan pertama, $y$ = bilangan kedua, $x+y=50$")
-                    st.markdown("**Langkah 2: Objektif**")
-                    st.markdown("- Maksimalkan $P=xy$, substitusi $y=50-x$ -> $P(x)=50x-x^2$")
-                    st.markdown("**Langkah 3: Titik Kritis**")
+            elif example_choice == "Product Optimization":
+                with st.expander("📋 Step-by-Step Solution", expanded=True):
+                    st.markdown("**Step 1: Define Variables**")
+                    st.markdown("- Let $x$ = first number, $y$ = second number, $x+y=50$")
+                    st.markdown("**Step 2: Objective**")
+                    st.markdown("- Maximize $P=xy$, substitute $y=50-x$ -> $P(x)=50x-x^2$")
+                    st.markdown("**Step 3: Critical Points**")
                     st.markdown("- $P'(x)=50-2x=0$ -> $x=25$")
-                    st.markdown("**Langkah 4: Hasil**")
-                    st.markdown("- Kedua bilangan 25 dan 25 -> produk 625")
-                st.success("✅ **Solusi:** 25 dan 25, produk maksimum 625.")
-                nilai_x = np.linspace(0, 50, 200)
-                nilai_produk = nilai_x * (50 - nilai_x)
+                    st.markdown("**Step 4: Result**")
+                    st.markdown("- Both numbers are 25 and 25 -> product is 625")
+                st.success("✅ **Solution:** 25 and 25, maximum product is 625.")
+                x_values = np.linspace(0, 50, 200)
+                product_values = x_values * (50 - x_values)
                 fig = go.Figure()
-                fig.add_trace(go.Scatter(x=nilai_x, y=nilai_produk, mode='lines', name='Produk', line=dict(width=3)))
-                fig.add_trace(go.Scatter(x=[25], y=[625], mode='markers', name='Maksimum', marker=dict(size=15, symbol='star')))
-                fig.update_layout(title="Produk vs. Bilangan Pertama", xaxis_title="Bilangan Pertama (x)", yaxis_title="Produk (xy)", template='plotly_white')
+                fig.add_trace(go.Scatter(x=x_values, y=product_values, mode='lines', name='Product', line=dict(width=3)))
+                fig.add_trace(go.Scatter(x=[25], y=[625], mode='markers', name='Maximum', marker=dict(size=15, symbol='star')))
+                fig.update_layout(title="Product vs. First Number", xaxis_title="First Number (x)", yaxis_title="Product (xy)", template='plotly_white')
                 st.plotly_chart(fig, use_container_width=True)
-            elif pilihan_contoh == "Volume Kotak (Luas Permukaan)":
-                with st.expander("📋 Solusi Langkah demi Langkah", expanded=True):
-                    st.markdown("**Langkah 1: Definisikan Variabel**")
-                    st.markdown("- Misalkan $x$ = panjang sisi potongan (inci), karton 12×12")
-                    st.markdown("**Langkah 2: Fungsi Volume**")
+            elif example_choice == "Box Volume (Surface Area)":
+                with st.expander("📋 Step-by-Step Solution", expanded=True):
+                    st.markdown("**Step 1: Define Variables**")
+                    st.markdown("- Let $x$ = side length of cut (inches), cardboard is 12×12")
+                    st.markdown("**Step 2: Volume Function**")
                     st.latex("V(x) = x(12-2x)^2 = 4x^3 - 48x^2 + 144x")
-                    st.markdown("**Langkah 3: Titik Kritis**")
+                    st.markdown("**Step 3: Critical Points**")
                     st.latex("V'(x) = 12x^2 - 96x + 144 -> x^2 - 8x +12 = 0 -> (x-2)(x-6)=0")
-                    st.markdown("**Langkah 4: Hasil**")
-                    st.markdown("- x=2 valid (x=6 membuat alas nol). Volume maksimum = 128 in³")
-                st.success("✅ **Solusi:** Potong kotak 2 inci dari setiap sudut -> volume 128 in³.")
-                nilai_x = np.linspace(0.1, 6, 200)
-                nilai_volume = 4*nilai_x**3 - 48*nilai_x**2 + 144*nilai_x
+                    st.markdown("**Step 4: Result**")
+                    st.markdown("- x=2 is valid (x=6 makes base zero). Maximum volume = 128 in³")
+                st.success("✅ **Solution:** Cut 2-inch squares from each corner -> volume is 128 in³.")
+                x_values = np.linspace(0.1, 6, 200)
+                volume_values = 4*x_values**3 - 48*x_values**2 + 144*x_values
                 fig = go.Figure()
-                fig.add_trace(go.Scatter(x=nilai_x, y=nilai_volume, mode='lines', name='Volume', line=dict(width=3)))
-                fig.add_trace(go.Scatter(x=[2], y=[128], mode='markers', name='Maksimum', marker=dict(size=15, symbol='star')))
-                fig.update_layout(title="Volume vs. Ukuran Potongan", xaxis_title="Ukuran Potongan Sudut (x) in", yaxis_title="Volume (in³)", template='plotly_white')
+                fig.add_trace(go.Scatter(x=x_values, y=volume_values, mode='lines', name='Volume', line=dict(width=3)))
+                fig.add_trace(go.Scatter(x=[2], y=[128], mode='markers', name='Maximum', marker=dict(size=15, symbol='star')))
+                fig.update_layout(title="Volume vs. Cut Size", xaxis_title="Corner Cut Size (x) in", yaxis_title="Volume (in³)", template='plotly_white')
                 st.plotly_chart(fig, use_container_width=True)
             else:
-                st.info("💡 Untuk masalah kustom, silakan pilih salah satu contoh yang telah ditentukan untuk melihat format solusi.")
+                st.info("💡 For custom problems, please select one of the predefined examples to see the solution format.")
         else:
-            st.warning("⚠️ Silakan masukkan masalah untuk diselesaikan.")
-
+            st.warning("⚠️ Please enter a problem to solve.")
