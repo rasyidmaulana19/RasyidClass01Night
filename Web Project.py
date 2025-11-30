@@ -548,7 +548,7 @@ elif page == "📈 Function Analysis":
     # Category Selection
     category = st.radio(
         "Select category:",
-        ["📐 Polynomial", "🔄 Trigonometric", "🔀 Mixed Functions"],
+        ["📐 Polynomial", "🔄 Trigonometric", "📈 Exponential", "🔀 Mixed Functions"],
         horizontal=True
     )
     
@@ -575,6 +575,16 @@ elif page == "📈 Function Analysis":
         }
         default_func = "sin(x)"
         help_text = "Examples: sin(x), cos(x), tan(x), sin(2*x)"
+    elif category == "📈 Exponential":
+        example_functions = {
+            "Natural Exponential": "exp(x)",
+            "Exponential with coefficient": "2*exp(x)",
+            "Negative Exponential": "exp(-x)",
+            "Natural Logarithm": "log(x)",
+            "Custom": ""
+        }
+        default_func = "exp(x)"
+        help_text = "Examples: exp(x), exp(-x), log(x), 2*exp(3*x)"
     else:  # Mixed Functions
         example_functions = {
             "Polynomial + Trig": "x**2 + sin(x)",
@@ -690,24 +700,73 @@ elif page == "📈 Function Analysis":
 # ================== PAGE 4: OPTIMIZATION ==================
 elif page == "🎯 Optimization Solver":
     st.title("🎯 Optimization Word Problem Solver")
-    st.markdown("### 📝 Enter Your Optimization Problem")
+    st.markdown("### 📝 Select Problem Category")
     
-    example_problems = {
-        "Rectangle Area (Perimeter Constraint)": {
-            "problem": "A farmer has 40 meters of fencing to enclose a rectangular area. What dimensions will maximize the enclosed area?",
-            "solution_type": "rectangle_perimeter"
-        },
-        "Box Volume (Surface Area)": {
-            "problem": "An open box is made from a square sheet of cardboard 12 inches on each side by cutting equal squares from the corners and folding up the sides. Find the size of the corner squares that maximizes the volume.",
-            "solution_type": "box_volume"
-        },
-        "Product Optimization": {
-            "problem": "Find two positive numbers whose sum is 50 and whose product is maximum.",
-            "solution_type": "sum_product"
+    # Category Selection for Optimization
+    opt_category = st.radio(
+        "Choose optimization category:",
+        ["📐 Polynomial", "🔄 Trigonometric", "📈 Exponential", "🔀 Mixed Problems"],
+        horizontal=True,
+        key="opt_category"
+    )
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Problems based on category
+    if opt_category == "📐 Polynomial":
+        example_problems = {
+            "Rectangle Area (Perimeter Constraint)": {
+                "problem": "A farmer has 40 meters of fencing to enclose a rectangular area. What dimensions will maximize the enclosed area?",
+                "solution_type": "rectangle_perimeter"
+            },
+            "Box Volume (Surface Area)": {
+                "problem": "An open box is made from a square sheet of cardboard 12 inches on each side by cutting equal squares from the corners and folding up the sides. Find the size of the corner squares that maximizes the volume.",
+                "solution_type": "box_volume"
+            },
+            "Product Optimization": {
+                "problem": "Find two positive numbers whose sum is 50 and whose product is maximum.",
+                "solution_type": "sum_product"
+            }
         }
-    }
+    elif opt_category == "🔄 Trigonometric":
+        example_problems = {
+            "Projectile Motion": {
+                "problem": "A projectile is fired with initial velocity 100 m/s. At what angle should it be fired to achieve maximum horizontal range? (Use range formula: R = (v²sin(2θ))/g, where g = 10 m/s²)",
+                "solution_type": "projectile"
+            },
+            "Window Design": {
+                "problem": "A Norman window has the shape of a rectangle topped by a semicircle. If the perimeter is 30 feet, find the dimensions that maximize the area.",
+                "solution_type": "norman_window"
+            }
+        }
+    elif opt_category == "📈 Exponential":
+        example_problems = {
+            "Population Growth": {
+                "problem": "A bacterial population grows according to P(t) = 1000e^(0.5t). At what time does the growth rate equal 2000 bacteria per hour?",
+                "solution_type": "population"
+            },
+            "Radioactive Decay": {
+                "problem": "A radioactive substance decays according to A(t) = 100e^(-0.2t). When is the decay rate equal to -10 grams per day?",
+                "solution_type": "decay"
+            }
+        }
+    else:  # Mixed Problems
+        example_problems = {
+            "Cylinder Volume (Mixed)": {
+                "problem": "A cylindrical can must have a volume of 1000 cm³. What dimensions minimize the surface area? (V = πr²h, SA = 2πr² + 2πrh)",
+                "solution_type": "cylinder"
+            },
+            "Fence and River": {
+                "problem": "A farmer wants to fence a rectangular field along a river. No fence is needed along the river. If he has 1200 meters of fencing, what dimensions maximize the area?",
+                "solution_type": "fence_river"
+            }
+        }
     
-    example_choice = st.selectbox("Select example or enter your own:", ["Custom Problem"] + list(example_problems.keys()))
+    example_choice = st.selectbox(
+        "Select optimization problem:",
+        ["Custom Problem"] + list(example_problems.keys())
+    )
+    
     if example_choice == "Custom Problem":
         problem_text = st.text_area("Enter word problem:", height=150, placeholder="Describe your optimization problem here...")
     else:
@@ -717,6 +776,8 @@ elif page == "🎯 Optimization Solver":
         if problem_text:
             st.markdown("---")
             st.markdown("### 🧮 Solution")
+            
+            # Polynomial Problems
             if example_choice == "Rectangle Area (Perimeter Constraint)":
                 with st.expander("📋 Step-by-Step Solution", expanded=True):
                     st.markdown("**Step 1: Define Variables**")
@@ -785,7 +846,112 @@ elif page == "🎯 Optimization Solver":
                 fig.add_trace(go.Scatter(x=[2], y=[128], mode='markers', name='Maximum', marker=dict(size=15, symbol='star', color='#fbbf24')))
                 fig.update_layout(title="Volume vs. Cut Size", xaxis_title="Corner Cut Size (x) in", yaxis_title="Volume (in³)", template='plotly_dark')
                 st.plotly_chart(fig, use_container_width=True)
+            
+            # Trigonometric Problems
+            elif example_choice == "Projectile Motion":
+                with st.expander("📋 Step-by-Step Solution", expanded=True):
+                    st.markdown("**Step 1: Range Formula**")
+                    st.latex(r"R(\theta) = \frac{v^2 \sin(2\theta)}{g} = \frac{100^2 \sin(2\theta)}{10} = 1000\sin(2\theta)")
+                    st.markdown("**Step 2: Find Maximum**")
+                    st.markdown("- Take derivative: $R'(\\theta) = 2000\\cos(2\\theta)$")
+                    st.markdown("- Set to zero: $\\cos(2\\theta) = 0$")
+                    st.markdown("- Solution: $2\\theta = 90°$ → $\\theta = 45°$")
+                    st.markdown("**Step 3: Verify**")
+                    st.markdown("- $R''(\\theta) = -4000\\sin(2\\theta) < 0$ at $\\theta = 45°$ → maximum")
+                st.success("✅ **Solution:** Fire at 45° angle for maximum range of 1000 meters.")
+                
+                theta_values = np.linspace(0, 90, 200)
+                range_values = 1000 * np.sin(2 * np.radians(theta_values))
+                fig = go.Figure()
+                fig.add_trace(go.Scatter(x=theta_values, y=range_values, mode='lines', name='Range', line=dict(width=3, color='#a78bfa')))
+                fig.add_trace(go.Scatter(x=[45], y=[1000], mode='markers', name='Maximum', marker=dict(size=15, symbol='star', color='#fbbf24')))
+                fig.update_layout(title="Range vs. Angle", xaxis_title="Angle (degrees)", yaxis_title="Range (m)", template='plotly_dark')
+                st.plotly_chart(fig, use_container_width=True)
+            
+            elif example_choice == "Window Design":
+                with st.expander("📋 Step-by-Step Solution", expanded=True):
+                    st.markdown("**Step 1: Define Variables**")
+                    st.markdown("- Let $x$ = width of rectangle, $y$ = height of rectangle")
+                    st.markdown("- Semicircle radius = $x/2$")
+                    st.markdown("**Step 2: Perimeter Constraint**")
+                    st.latex(r"P = x + 2y + \frac{\pi x}{2} = 30")
+                    st.markdown("- Solve for $y$: $y = \\frac{30 - x - \\frac{\\pi x}{2}}{2}$")
+                    st.markdown("**Step 3: Area Function**")
+                    st.latex(r"A(x) = xy + \frac{\pi x^2}{8}")
+                    st.markdown("**Step 4: Optimize**")
+                    st.markdown("- Find critical point using calculus")
+                    st.markdown("- Optimal: $x \\approx 8.4$ ft, $y \\approx 4.2$ ft")
+                st.success("✅ **Solution:** Width ≈ 8.4 ft, Height ≈ 4.2 ft for maximum area ≈ 42 ft².")
+            
+            # Exponential Problems
+            elif example_choice == "Population Growth":
+                with st.expander("📋 Step-by-Step Solution", expanded=True):
+                    st.markdown("**Step 1: Growth Rate Formula**")
+                    st.latex(r"P(t) = 1000e^{0.5t}")
+                    st.markdown("- Growth rate: $P'(t) = 500e^{0.5t}$")
+                    st.markdown("**Step 2: Find When Rate = 2000**")
+                    st.latex(r"500e^{0.5t} = 2000")
+                    st.latex(r"e^{0.5t} = 4")
+                    st.latex(r"0.5t = \ln(4)")
+                    st.latex(r"t = 2\ln(4) \approx 2.77 \text{ hours}")
+                st.success("✅ **Solution:** Growth rate equals 2000 bacteria/hour at t ≈ 2.77 hours.")
+                
+                t_values = np.linspace(0, 5, 200)
+                rate_values = 500 * np.exp(0.5 * t_values)
+                fig = go.Figure()
+                fig.add_trace(go.Scatter(x=t_values, y=rate_values, mode='lines', name='Growth Rate', line=dict(width=3, color='#10b981')))
+                fig.add_trace(go.Scatter(x=[2.77], y=[2000], mode='markers', name='Target', marker=dict(size=15, symbol='star', color='#fbbf24')))
+                fig.update_layout(title="Growth Rate vs. Time", xaxis_title="Time (hours)", yaxis_title="Growth Rate (bacteria/hour)", template='plotly_dark')
+                st.plotly_chart(fig, use_container_width=True)
+            
+            elif example_choice == "Radioactive Decay":
+                with st.expander("📋 Step-by-Step Solution", expanded=True):
+                    st.markdown("**Step 1: Decay Rate Formula**")
+                    st.latex(r"A(t) = 100e^{-0.2t}")
+                    st.markdown("- Decay rate: $A'(t) = -20e^{-0.2t}$")
+                    st.markdown("**Step 2: Find When Rate = -10**")
+                    st.latex(r"-20e^{-0.2t} = -10")
+                    st.latex(r"e^{-0.2t} = 0.5")
+                    st.latex(r"-0.2t = \ln(0.5)")
+                    st.latex(r"t = -\frac{\ln(0.5)}{0.2} \approx 3.47 \text{ days}")
+                st.success("✅ **Solution:** Decay rate equals -10 g/day at t ≈ 3.47 days.")
+            
+            # Mixed Problems
+            elif example_choice == "Cylinder Volume (Mixed)":
+                with st.expander("📋 Step-by-Step Solution", expanded=True):
+                    st.markdown("**Step 1: Volume Constraint**")
+                    st.latex(r"\pi r^2 h = 1000 \Rightarrow h = \frac{1000}{\pi r^2}")
+                    st.markdown("**Step 2: Surface Area**")
+                    st.latex(r"SA = 2\pi r^2 + 2\pi r h = 2\pi r^2 + \frac{2000}{r}")
+                    st.markdown("**Step 3: Minimize**")
+                    st.latex(r"SA'(r) = 4\pi r - \frac{2000}{r^2} = 0")
+                    st.markdown("- Optimal: $r \\approx 5.42$ cm, $h \\approx 10.84$ cm")
+                st.success("✅ **Solution:** Radius ≈ 5.42 cm, Height ≈ 10.84 cm minimizes surface area.")
+            
+            elif example_choice == "Fence and River":
+                with st.expander("📋 Step-by-Step Solution", expanded=True):
+                    st.markdown("**Step 1: Define Variables**")
+                    st.markdown("- Let $x$ = width (perpendicular to river)")
+                    st.markdown("- Let $y$ = length (parallel to river)")
+                    st.markdown("**Step 2: Fence Constraint**")
+                    st.markdown("- Only 3 sides need fence: $2x + y = 1200$")
+                    st.markdown("- Solve: $y = 1200 - 2x$")
+                    st.markdown("**Step 3: Area Function**")
+                    st.latex(r"A(x) = xy = x(1200 - 2x) = 1200x - 2x^2")
+                    st.markdown("**Step 4: Optimize**")
+                    st.markdown("- $A'(x) = 1200 - 4x = 0$ → $x = 300$ m")
+                    st.markdown("- $y = 1200 - 600 = 600$ m")
+                st.success("✅ **Solution:** Width = 300 m, Length = 600 m, Maximum Area = 180,000 m².")
+                
+                x_values = np.linspace(0, 600, 200)
+                area_values = x_values * (1200 - 2*x_values)
+                fig = go.Figure()
+                fig.add_trace(go.Scatter(x=x_values, y=area_values, mode='lines', name='Area', line=dict(width=3, color='#06b6d4')))
+                fig.add_trace(go.Scatter(x=[300], y=[180000], mode='markers', name='Maximum', marker=dict(size=15, symbol='star', color='#fbbf24')))
+                fig.update_layout(title="Area vs. Width", xaxis_title="Width (m)", yaxis_title="Area (m²)", template='plotly_dark')
+                st.plotly_chart(fig, use_container_width=True)
+            
             else:
-                st.info("💡 For custom problems, please select one of the predefined examples to see the solution format.")
+                st.info("💡 Please select one of the predefined problems to see the detailed solution.")
         else:
             st.warning("⚠️ Please enter a problem to solve.")
