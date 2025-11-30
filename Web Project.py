@@ -16,7 +16,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# =================== GEN-Z MODERN NEON THEME CSS ===================
+# =================== SLEEK BLACK THEME CSS ===================
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
@@ -25,102 +25,104 @@ html, body, [class*="css"] {
 }
 /* Main App Background */
 .stApp {
-    background: radial-gradient(circle at 20% 30%, #7f5af0, #2cb67d 40%, #16161a 90%);
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
     background-attachment: fixed;
-    color: #fffffe;
+    color: #e0e0e0;
 }
 /* Title Styling */
 h1 {
     font-weight: 900;
     font-size: 3rem;
     text-align: center;
-    background: linear-gradient(90deg, #2cb67d, #7f5af0, #00c6ff);
+    background: linear-gradient(90deg, #ffffff, #b0b0b0, #ffffff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 3px;
     animation: glow 2s ease-in-out infinite alternate;
 }
 @keyframes glow {
-  from { text-shadow: 0 0 10px rgba(255,255,255,0.3); }
-  to { text-shadow: 0 0 25px rgba(255,255,255,0.7); }
+  from { text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+  to { text-shadow: 0 0 20px rgba(255,255,255,0.4); }
 }
 h2, h3 {
-    color: #fffffe;
+    color: #f5f5f5;
     font-weight: 700;
 }
-/* Cards - Glassmorphism */
+/* Cards - Dark Glassmorphism */
 div[data-testid="stHorizontalBlock"] > div {
-    background: rgba(255,255,255,0.08);
+    background: rgba(30,30,30,0.85);
     padding: 25px;
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.7);
     backdrop-filter: blur(15px);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 div[data-testid="stHorizontalBlock"] > div:hover {
     transform: translateY(-6px);
-    box-shadow: 0 16px 45px rgba(0,0,0,0.5);
+    box-shadow: 0 16px 45px rgba(0,0,0,0.9);
+    border: 1px solid rgba(255,255,255,0.2);
 }
 /* Sidebar */
 section[data-testid="stSidebar"] {
-    background: rgba(22, 22, 26, 0.45);
+    background: rgba(15, 15, 15, 0.95);
     backdrop-filter: blur(20px);
-    border-right: 1px solid rgba(255,255,255,0.15);
+    border-right: 1px solid rgba(255,255,255,0.1);
 }
 /* Navigation Radio Buttons */
 .stRadio > div {
-    background: rgba(255,255,255,0.1);
+    background: rgba(40,40,40,0.6);
     padding: 15px;
     border-radius: 15px;
 }
-/* Buttons - RGB neon hover */
+/* Buttons - Elegant Dark */
 .stButton > button {
-    background: linear-gradient(135deg, #7f5af0, #2cb67d);
+    background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
     color: white;
     border-radius: 15px;
-    border: none;
+    border: 1px solid rgba(255,255,255,0.2);
     font-weight: 700;
     padding: 0.7rem 2rem;
     transition: 0.3s ease;
-    box-shadow: 0 0 15px rgba(127, 90, 240, 0.6);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 .stButton > button:hover {
     transform: scale(1.08) translateY(-4px);
-    box-shadow: 0 0 25px rgba(44, 182, 125, 0.8);
-    background: linear-gradient(135deg, #00c6ff, #7f5af0);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, #3a3a3a, #4a4a4a);
+    border: 1px solid rgba(255,255,255,0.4);
 }
 /* Input Box */
 .stTextInput > div > input {
-    background: rgba(255,255,255,0.15);
+    background: rgba(30,30,30,0.8);
     padding: 12px;
     border-radius: 12px;
     color: white;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.2);
 }
 /* Expander */
 .streamlit-expanderHeader {
-    color: #2cb67d;
+    color: #cccccc;
     font-weight: 600;
 }
 /* Plot graphs frame */
 .plotly-graph-div {
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
 }
 /* Photo container styling */
 .photo-container {
-    background: rgba(255,255,255,0.1);
+    background: rgba(30,30,30,0.7);
     border-radius: 15px;
     padding: 20px;
     margin: 10px 0;
-    border: 2px solid rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.15);
     transition: all 0.3s ease;
 }
 .photo-container:hover {
     transform: scale(1.02);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
 }
 </style>
 """, unsafe_allow_html=True)
@@ -176,10 +178,10 @@ def display_member_photo(uploaded_file, name):
             st.error(f"Failed to display image for {name}: {e}")
     else:
         st.markdown(f"""
-        <div style='width: 200px; height: 200px; background: linear-gradient(135deg, #667eea, #764ba2); 
+        <div style='width: 200px; height: 200px; background: linear-gradient(135deg, #2a2a2a, #3a3a3a); 
                     border-radius: 50%; margin: 0 auto; display: flex; align-items: center; 
-                    justify-content: center; font-size: 4rem; border: 4px solid rgba(255,255,255,0.3);
-                    box-shadow: 0 8px 25px rgba(0,0,0,0.3);'>
+                    justify-content: center; font-size: 4rem; border: 4px solid rgba(255,255,255,0.2);
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.5);'>
             👤
         </div>
         """, unsafe_allow_html=True)
@@ -219,23 +221,23 @@ if page == "🏠 Home":
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown("""
-        <div style='background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);'>
-            <h3 style='text-align: center;'>👥 Team Members</h3>
-            <p style='text-align: center; color: #6b7280;'>Meet the development team and their contributions</p>
+        <div style='background: linear-gradient(135deg, #1a1a1a, #2a2a2a); padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);'>
+            <h3 style='text-align: center; color: #ffffff;'>👥 Team Members</h3>
+            <p style='text-align: center; color: #b0b0b0;'>Meet the development team and their contributions</p>
         </div>
         """, unsafe_allow_html=True)
     with col2:
         st.markdown("""
-        <div style='background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);'>
-            <h3 style='text-align: center;'>📈 Function Analysis</h3>
-            <p style='text-align: center; color: #6b7280;'>Visualize functions and compute derivatives</p>
+        <div style='background: linear-gradient(135deg, #1a1a1a, #2a2a2a); padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);'>
+            <h3 style='text-align: center; color: #ffffff;'>📈 Function Analysis</h3>
+            <p style='text-align: center; color: #b0b0b0;'>Visualize functions and compute derivatives</p>
         </div>
         """, unsafe_allow_html=True)
     with col3:
         st.markdown("""
-        <div style='background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);'>
-            <h3 style='text-align: center;'>🎯 Optimization</h3>
-            <p style='text-align: center; color: #6b7280;'>Solve word problems step by step</p>
+        <div style='background: linear-gradient(135deg, #1a1a1a, #2a2a2a); padding: 2rem; border-radius: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);'>
+            <h3 style='text-align: center; color: #ffffff;'>🎯 Optimization</h3>
+            <p style='text-align: center; color: #b0b0b0;'>Solve word problems step by step</p>
         </div>
         """, unsafe_allow_html=True)
     st.markdown("---")
