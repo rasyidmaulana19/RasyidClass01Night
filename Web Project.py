@@ -405,104 +405,75 @@ if page == "🏠 Home":
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # Engineering Applications
+    # Features Section
     st.markdown("""
     <div style='background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(16, 185, 129, 0.1)); 
                 padding: 2rem; border-radius: 20px; border: 2px solid rgba(6, 182, 212, 0.3);
                 margin-bottom: 2rem;'>
         <h2 style='color: #22d3ee; text-align: center; font-size: 2rem; margin-bottom: 1rem;'>
-            🔧 Applications of Derivatives in Engineering
+            🚀 Application Features
         </h2>
     </div>
     """, unsafe_allow_html=True)
     
-    applications = [
-        {
-            "icon": "🚗",
-            "title": "Mechanical & Automotive Engineering",
-            "desc": "Calculate vehicle velocity and acceleration, optimize engine efficiency, and design transmission systems.",
-            "formula": r"v(t) = \frac{ds}{dt}, \quad a(t) = \frac{dv}{dt}",
-            "color": "#3b82f6"
-        },
-        {
-            "icon": "⚡",
-            "title": "Electrical Engineering",
-            "desc": "Analyze electrical current, circuit voltage, and design electronic filters with optimal frequency response.",
-            "formula": r"i(t) = \frac{dq}{dt}, \quad v(t) = L\frac{di}{dt}",
-            "color": "#8b5cf6"
-        },
-        {
-            "icon": "🏗️",
-            "title": "Civil Engineering",
-            "desc": "Calculate maximum forces on structures, optimize bridge shapes, and analyze beam deflection.",
-            "formula": r"M = -EI\frac{d^2y}{dx^2}",
-            "color": "#06b6d4"
-        },
-        {
-            "icon": "🏭",
-            "title": "Chemical & Process Engineering",
-            "desc": "Determine chemical reaction rates, optimize production, and control reactor temperature.",
-            "formula": r"r = -\frac{dC}{dt} = kC^n",
-            "color": "#10b981"
-        },
-        {
-            "icon": "✈️",
-            "title": "Aerospace Engineering",
-            "desc": "Calculate aircraft lift force, optimize wing shape, and analyze flight trajectory.",
-            "formula": r"F_L = \frac{1}{2}\rho v^2 C_L A",
-            "color": "#f59e0b"
-        },
-        {
-            "icon": "🤖",
-            "title": "Robotics & AI",
-            "desc": "Gradient descent for machine learning, robot path planning, and servo motor control.",
-            "formula": r"\theta_{new} = \theta_{old} - \alpha \frac{\partial J}{\partial \theta}",
-            "color": "#ec4899"
-        }
-    ]
+    feat_col1, feat_col2 = st.columns(2)
     
-    col_app1, col_app2 = st.columns(2)
-    
-    for idx, app in enumerate(applications):
-        col = col_app1 if idx % 2 == 0 else col_app2
-        with col:
-            st.markdown(f"""
-            <div style='background: rgba(30,41,59,0.8); padding: 1.5rem; border-radius: 15px; 
-                        border-left: 4px solid {app["color"]}; margin-bottom: 1rem;
-                        transition: all 0.3s ease;'
-                        onmouseover="this.style.transform='translateX(10px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.3)'"
-                        onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none'">
-                <h4 style='color: {app["color"]}; margin-bottom: 0.5rem;'>{app["icon"]} {app["title"]}</h4>
-                <p style='color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;'>{app["desc"]}</p>
-            </div>
-            """, unsafe_allow_html=True)
-            st.latex(app["formula"])
-            st.markdown("<br>", unsafe_allow_html=True)
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # Features Section
-    st.markdown("""
-    <div style='background: rgba(30,41,59,0.6); padding: 2rem; border-radius: 15px; 
-                border: 1px solid rgba(59, 130, 246, 0.3);'>
-        <h3 style='color: #60a5fa; margin-bottom: 1.5rem;'>🚀 Application Features</h3>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    features_col1, features_col2 = st.columns(2)
-    with features_col1:
+    with feat_col1:
         st.markdown("""
-        <ul style='color: #cbd5e1; line-height: 2; font-size: 1rem;'>
-            <li>✅ <strong style='color: #60a5fa;'>Function Visualization</strong>: Plot any mathematical function</li>
-            <li>✅ <strong style='color: #60a5fa;'>Derivative Computation</strong>: Calculate derivatives step-by-step with LaTeX</li>
-        </ul>
+        <div style='background: rgba(30,41,59,0.8); padding: 2rem; border-radius: 15px; 
+                    border-left: 5px solid #3b82f6; margin-bottom: 1rem;
+                    transition: all 0.3s ease;'
+                    onmouseover="this.style.transform='translateX(10px)'; this.style.boxShadow='0 8px 20px rgba(59, 130, 246, 0.3)'"
+                    onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none'">
+            <h3 style='color: #60a5fa; margin-bottom: 1rem;'>📊 Function Visualization</h3>
+            <p style='color: #cbd5e1; line-height: 1.8;'>
+                Plot and visualize any mathematical function with interactive graphs. 
+                Explore function behavior across different ranges.
+            </p>
+        </div>
         """, unsafe_allow_html=True)
-    with features_col2:
+        
         st.markdown("""
-        <ul style='color: #cbd5e1; line-height: 2; font-size: 1rem;'>
-            <li>✅ <strong style='color: #60a5fa;'>Optimization Solver</strong>: Solve real-world optimization problems</li>
-            <li>✅ <strong style='color: #60a5fa;'>Interactive Plots</strong>: Dynamic and responsive visualizations</li>
-        </ul>
+        <div style='background: rgba(30,41,59,0.8); padding: 2rem; border-radius: 15px; 
+                    border-left: 5px solid #8b5cf6; margin-bottom: 1rem;
+                    transition: all 0.3s ease;'
+                    onmouseover="this.style.transform='translateX(10px)'; this.style.boxShadow='0 8px 20px rgba(139, 92, 246, 0.3)'"
+                    onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none'">
+            <h3 style='color: #a78bfa; margin-bottom: 1rem;'>🧮 Derivative Computation</h3>
+            <p style='color: #cbd5e1; line-height: 1.8;'>
+                Calculate derivatives automatically with step-by-step solutions. 
+                View results in beautiful LaTeX format.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with feat_col2:
+        st.markdown("""
+        <div style='background: rgba(30,41,59,0.8); padding: 2rem; border-radius: 15px; 
+                    border-left: 5px solid #06b6d4; margin-bottom: 1rem;
+                    transition: all 0.3s ease;'
+                    onmouseover="this.style.transform='translateX(10px)'; this.style.boxShadow='0 8px 20px rgba(6, 182, 212, 0.3)'"
+                    onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none'">
+            <h3 style='color: #22d3ee; margin-bottom: 1rem;'>🎯 Optimization Solver</h3>
+            <p style='color: #cbd5e1; line-height: 1.8;'>
+                Solve real-world optimization problems with detailed solutions. 
+                Perfect for engineering and mathematical applications.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div style='background: rgba(30,41,59,0.8); padding: 2rem; border-radius: 15px; 
+                    border-left: 5px solid #10b981; margin-bottom: 1rem;
+                    transition: all 0.3s ease;'
+                    onmouseover="this.style.transform='translateX(10px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.3)'"
+                    onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='none'">
+            <h3 style='color: #34d399; margin-bottom: 1rem;'>📈 Interactive Plots</h3>
+            <p style='color: #cbd5e1; line-height: 1.8;'>
+                Dynamic and responsive visualizations using Plotly. 
+                Zoom, pan, and explore your functions interactively.
+            </p>
+        </div>
         """, unsafe_allow_html=True)
 
 # ================== PAGE 2: TEAM MEMBERS ==================
