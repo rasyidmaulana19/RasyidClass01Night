@@ -543,15 +543,77 @@ elif page == "👥 Team Members":
 elif page == "📈 Function Analysis":
     st.title("📈 Function Visualization & Differentiation")
     
+    st.markdown("### 🎯 Choose Function Category")
+    
+    # Category Selection
+    category = st.radio(
+        "Select category:",
+        ["📐 Polynomial", "🔄 Trigonometric", "🔀 Mixed Functions"],
+        horizontal=True
+    )
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Example functions based on category
+    if category == "📐 Polynomial":
+        example_functions = {
+            "Quadratic": "x**2 + 3*x + 2",
+            "Cubic": "x**3 - 2*x**2 + x - 5",
+            "Quartic": "x**4 - 4*x**3 + 6*x**2",
+            "Linear": "2*x + 5",
+            "Custom": ""
+        }
+        default_func = "x**2 + 3*x + 2"
+        help_text = "Examples: x**2, x**3 - 2*x, 5*x**4 + 3*x**2 - 1"
+    elif category == "🔄 Trigonometric":
+        example_functions = {
+            "Sine": "sin(x)",
+            "Cosine": "cos(x)",
+            "Tangent": "tan(x)",
+            "Sine + Cosine": "sin(x) + cos(x)",
+            "Custom": ""
+        }
+        default_func = "sin(x)"
+        help_text = "Examples: sin(x), cos(x), tan(x), sin(2*x)"
+    else:  # Mixed Functions
+        example_functions = {
+            "Polynomial + Trig": "x**2 + sin(x)",
+            "Exponential + Trig": "exp(x) * cos(x)",
+            "Polynomial * Trig": "x * sin(x)",
+            "Complex": "x**3 + 2*sin(x) - cos(x)",
+            "Custom": ""
+        }
+        default_func = "x**2 + sin(x)"
+        help_text = "Examples: x**2 + sin(x), exp(x)*cos(x), x*sin(x)"
+    
     st.markdown("### 🔢 Enter a Mathematical Function")
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        input_function = st.text_input(
-            "Function (use x as variable):",
-            value="x**2 + 3*x + 2",
-            help="Examples: x**2, sin(x), exp(x), x**3 - 2*x"
+    
+    col_select, col_range = st.columns([3, 1])
+    
+    with col_select:
+        # Dropdown for example selection
+        selected_example = st.selectbox(
+            "Choose example or select Custom:",
+            list(example_functions.keys()),
+            index=0
         )
-    with col2:
+        
+        # Input field
+        if selected_example == "Custom":
+            input_function = st.text_input(
+                "Function (use x as variable):",
+                value="",
+                help=help_text,
+                placeholder="Enter your custom function here..."
+            )
+        else:
+            input_function = st.text_input(
+                "Function (use x as variable):",
+                value=example_functions[selected_example],
+                help=help_text
+            )
+    
+    with col_range:
         x_range = st.slider("Plot Range", -20, 20, (-10, 10))
     
     try:
@@ -561,7 +623,7 @@ elif page == "📈 Function Analysis":
         st.latex(f"f(x) = {latex(function_expr)}")
     except Exception as e:
         st.error(f"❌ Error parsing function: {e}")
-        st.info("Use Python/SymPy syntax, examples: x**2, sin(x), exp(x).")
+        st.info("Use Python/SymPy syntax. " + help_text)
         function_expr = None
 
     if function_expr is not None:
@@ -580,6 +642,8 @@ elif page == "📈 Function Analysis":
                         st.markdown("- Using **Trigonometric Rules**")
                     if function_expr.has(sp.exp):
                         st.markdown("- Using **Exponential Rule**: $\\frac{d}{dx}[e^x] = e^x$")
+                    if function_expr.has(sp.tan):
+                        st.markdown("- Using **Tangent Rule**: $\\frac{d}{dx}[\\tan x] = \\sec^2 x$")
                     st.markdown("**Step 3:** Simplify the result")
                     simplified_derivative = simplify(derivative)
                     st.markdown("**Step 4:** Final derivative")
