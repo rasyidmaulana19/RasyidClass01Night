@@ -129,11 +129,14 @@ div.stMarkdown strong {
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
+    object-position: center;
     border: 4px solid;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     transition: all 0.4s ease;
     position: relative;
     z-index: 2;
+    display: block;
+    margin: 0 auto;
 }
 
 .team-card:hover .member-photo {
