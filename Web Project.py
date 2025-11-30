@@ -267,13 +267,36 @@ elif halaman == "👥 Anggota Tim":
     st.markdown("---")
     col1, col2 = st.columns(2)
     with col1:
-        st.markdown("""<div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
-        display_member_photo(foto_rasyid, "Rasyid Irvan Maulana")
-        st.markdown("<h3>Rasyid Irvan Maulana</h3><p style='font-weight: bold; color: #fbbf24;'>Ketua Proyek & Pengembang Backend</p><p style='font-size: 0.9rem;'>Integrasi API, algoritma turunan, arsitektur sistem</p></div>", unsafe_allow_html=True)
+        st.markdown(f"""
+        <div style="
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem; 
+        border-radius: 15px; 
+        text-align: center; 
+        color: white;">
+        <img src="data:image/png;base64,{base64.b64encode(foto_rasyid.read()).decode()}" 
+             style="width:160px; height:160px; border-radius:50%; border:5px solid white; object-fit:cover;">
+        <h3>Rasyid Irvan Maulana</h3>
+        <p style='font-weight: bold; color: #fbbf24;'>Ketua Proyek & Pengembang Backend</p>
+        <p style='font-size: 0.9rem;'>Integrasi API, algoritma turunan, arsitektur sistem</p>
+    </div>
+    """, unsafe_allow_html=True)
+
     with col2:
-        st.markdown("""<div style='background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 2rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
-        display_member_photo(foto_luthfi, "Luthfi Ilham Pratama")
-        st.markdown("<h3>Luthfi Ilham Pratama</h3><p style='font-weight: bold; color: #fbbf24;'>Pengembang Frontend</p><p style='font-size: 0.9rem;'>Desain UI/UX, komponen Streamlit, visualisasi</p></div>", unsafe_allow_html=True)
+         st.markdown(f"""
+        <div style="
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem; 
+        border-radius: 15px; 
+        text-align: center; 
+        color: white;">
+        <img src="data:image/png;base64,{base64.b64encode(foto_rasyid.read()).decode()}" 
+             style="width:160px; height:160px; border-radius:50%; border:5px solid white; object-fit:cover;">
+        <h3>Luthfi Ilham Pratama</h3>
+        <p style='font-weight: bold; color: #fbbf24;'>Ketua Proyek & Pengembang Backend</p>
+        <p style='font-size: 0.9rem;'>Integrasi API, algoritma turunan, arsitektur sistem</p>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     col3, col4 = st.columns(2)
