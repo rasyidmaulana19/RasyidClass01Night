@@ -4,9 +4,6 @@ import matplotlib.pyplot as plt
 import sympy as sp
 from sympy import symbols, diff, latex, sympify, simplify
 import plotly.graph_objects as go
-from PIL import Image, ImageDraw
-import io
-import base64
 
 # ---------------- Page config ----------------
 st.set_page_config(
@@ -92,56 +89,16 @@ div.stMarkdown strong {
 """, unsafe_allow_html=True)
 
 # ---------------- Helper functions ----------------
-def display_member_photo(uploaded_file, name):
-    """Display member photo or placeholder if None."""
-    if uploaded_file is not None:
-        try:
-            if hasattr(uploaded_file, "seek"):
-                uploaded_file.seek(0)
-            image = Image.open(uploaded_file)
-            
-            if image.mode != 'RGB':
-                image = image.convert('RGB')
-            
-            size = min(image.size)
-            image = image.crop(((image.width - size) // 2, 
-                               (image.height - size) // 2,
-                               (image.width + size) // 2, 
-                               (image.height + size) // 2))
-            
-            image.thumbnail((300, 300))
-            
-            mask = Image.new('L', image.size, 0)
-            draw = ImageDraw.Draw(mask)
-            draw.ellipse((0, 0) + image.size, fill=255)
-            
-            output = Image.new('RGBA', image.size, (0, 0, 0, 0))
-            output.paste(image, (0, 0))
-            output.putalpha(mask)
-            
-            buffered = io.BytesIO()
-            output.save(buffered, format="PNG")
-            img_str = base64.b64encode(buffered.getvalue()).decode()
-            
-            st.markdown(f"""
-            <div style='text-align: center; margin: 20px 0;'>
-                <img src='data:image/png;base64,{img_str}' 
-                     style='width: 180px; height: 180px; border-radius: 50%; 
-                            object-fit: cover; border: 3px solid #3b82f6;
-                            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);'/>
-            </div>
-            """, unsafe_allow_html=True)
-        except Exception as e:
-            st.error(f"Failed to display image for {name}: {e}")
-    else:
-        st.markdown(f"""
-        <div style='width: 180px; height: 180px; background: linear-gradient(135deg, #3b82f6, #2563eb); 
-                    border-radius: 50%; margin: 0 auto; display: flex; align-items: center; 
-                    justify-content: center; font-size: 3.5rem; border: 3px solid #60a5fa;
-                    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);'>
-            👤
-        </div>
-        """, unsafe_allow_html=True)
+def display_member_photo(github_url, name):
+    """Display member photo from GitHub URL."""
+    st.markdown(f"""
+    <div style='text-align: center; margin: 20px 0;'>
+        <img src='{github_url}' 
+             style='width: 180px; height: 180px; border-radius: 50%; 
+                    object-fit: cover; border: 3px solid #3b82f6;
+                    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);'/>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ---------------- Sidebar navigation ----------------
 st.sidebar.title("📋 Navigation")
@@ -166,7 +123,6 @@ st.sidebar.markdown("""
 - SymPy
 - Plotly
 - NumPy
-- PIL
 """)
 
 # ================== PAGE 1: HOME ==================
@@ -215,20 +171,13 @@ elif page == "👥 Team Members":
     st.markdown("### Meet the people behind this project")
     
     st.markdown("---")
-    with st.expander("📸 Upload Team Member Photos", expanded=False):
-        st.markdown("**Upload a photo for each team member:**")
-        col_upload1, col_upload2 = st.columns(2)
-        with col_upload1:
-            photo_rasyid = st.file_uploader("Rasyid Irvan Maulana's Photo", type=['png', 'jpg', 'jpeg'], key="photo1")
-            photo_luthfi = st.file_uploader("Luthfi Ilham Pratama's Photo", type=['png', 'jpg', 'jpeg'], key="photo2")
-        with col_upload2:
-            photo_andrian = st.file_uploader("Andrian Ramadhan's Photo", type=['png', 'jpg', 'jpeg'], key="photo3")
-            photo_restu = st.file_uploader("Restu Imam Fakhrezi's Photo", type=['png', 'jpg', 'jpeg'], key="photo4")
     
-    st.markdown("---")
+    # GitHub raw URL untuk foto
+    github_base_url = "https://raw.githubusercontent.com/rasyidmaulana19/RasyidClass01Night/main/image/"
+    
     col1, col2 = st.columns(2)
     with col1:
-        display_member_photo(photo_rasyid, "Rasyid Irvan Maulana")
+        display_member_photo(f"{github_base_url}rasyid.jpeg", "Rasyid Irvan Maulana")
         st.markdown("""
         <div style='text-align: center; margin-top: 20px;'>
             <h3 style='color: #e4e4e7;'>Rasyid Irvan Maulana</h3>
@@ -238,7 +187,7 @@ elif page == "👥 Team Members":
         """, unsafe_allow_html=True)
     
     with col2:
-        display_member_photo(photo_luthfi, "Luthfi Ilham Pratama")
+        display_member_photo(f"{github_base_url}luthfi.jpeg", "Luthfi Ilham Pratama")
         st.markdown("""
         <div style='text-align: center; margin-top: 20px;'>
             <h3 style='color: #e4e4e7;'>Luthfi Ilham Pratama</h3>
@@ -251,21 +200,21 @@ elif page == "👥 Team Members":
     
     col3, col4 = st.columns(2)
     with col3:
-        display_member_photo(photo_andrian, "Andrian Ramadhan")
+        display_member_photo(f"{github_base_url}andrian.jpeg", "Andrian Ramadhan")
         st.markdown("""
         <div style='text-align: center; margin-top: 20px;'>
             <h3 style='color: #e4e4e7;'>Andrian Ramadhan</h3>
-            <p style='font-weight: bold; color: #60a5fa; font-size: 1rem;'>Algorithm & Mathematics Engineer</p>
+            <p style='font-weight: bold; color: #22d3ee; font-size: 1rem;'>Algorithm & Mathematics Engineer</p>
             <p style='font-size: 0.9rem; color: #cbd5e1;'>Translates complex mathematical concepts into precise and optimized algorithms.</p>
         </div>
         """, unsafe_allow_html=True)
     
     with col4:
-        display_member_photo(photo_restu, "Restu Imam Fakhrezi")
+        display_member_photo(f"{github_base_url}restu.jpeg", "Restu Imam Fakhrezi")
         st.markdown("""
         <div style='text-align: center; margin-top: 20px;'>
             <h3 style='color: #e4e4e7;'>Restu Imam Fakhrezi</h3>
-            <p style='font-weight: bold; color: #a78bfa; font-size: 1rem;'>Computational Mathematics Engineer</p>
+            <p style='font-weight: bold; color: #34d399; font-size: 1rem;'>Computational Mathematics Engineer</p>
             <p style='font-size: 0.9rem; color: #cbd5e1;'>Analyzes mathematical formulations to ensure reliability and correctness.</p>
         </div>
         """, unsafe_allow_html=True)
