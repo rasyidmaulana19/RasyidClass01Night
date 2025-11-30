@@ -269,22 +269,22 @@ elif halaman == "👥 Anggota Tim":
     with col1:
         st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
         display_member_photo(foto_rasyid, "Rasyid Irvan Maulana")
-        st.markdown("<h3>Rasyid Irvan Maulana</h3><p style='font-weight: bold; color: #fbbf24;'>Project Lead • Backend Architect</p><p style='font-size: 0.9rem;'>Crafts the core system architecture and backend infrastructure that drive the entire platform.Leads API integration, develops derivative logic, and ensures all system components operate consistently and efficiently.</p></div>", unsafe_allow_html=True)
+        st.markdown("<h3>Rasyid Irvan Maulana</h3><p style='font-weight: bold; color: #fbbf24;'>Project Lead • Backend Architect</p><p style='font-size: 0.9rem;'>Crafts the core system architecture and backend infrastructure that drive the entire platform. Leads API integration, develops derivative logic, and ensures all system components operate consistently and efficiently.</p></div>", unsafe_allow_html=True)
     with col2:
         st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
         display_member_photo(foto_luthfi, "Luthfi Ilham Pratama")
-        st.markdown("<h3>Luthfi Ilham Pratama</h3><p style='font-weight: bold; color: #fbbf24;'>Pengembang Frontend</p><p style='font-size: 0.9rem;'>Desain UI/UX, komponen Streamlit, visualisasi</p></div>", unsafe_allow_html=True)
+        st.markdown("<h3>Luthfi Ilham Pratama</h3><p style='font-weight: bold; color: #fbbf24;'>Frontend Engineer • UI/UX Designer</p><p style='font-size: 0.9rem;'>Designs intuitive, user-centered interfaces with modern and responsive layouts. Creates elegant Streamlit components and visual elements that enhance usability across devices.</p></div>", unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     col3, col4 = st.columns(2)
     with col3:
         st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
         display_member_photo(foto_andrian, "Andrian Ramadhan")
-        st.markdown("<h3>Andrian Ramadhan</h3><p style='font-weight: bold; color: #fbbf24;'>Spesialis Matematika</p><p style='font-size: 0.9rem;'>Algoritma optimasi, validasi matematis, pengujian</p></div>", unsafe_allow_html=True)
+        st.markdown("<h3>Andrian Ramadhan</h3><p style='font-weight: bold; color: #fbbf24;'>Algorithm & Mathematics Engineer</p><p style='font-size: 0.9rem;'>Translates complex mathematical concepts into precise and optimized algorithms. Validates models, refines derivative computations, and ensures mathematical accuracy throughout the application.</p></div>", unsafe_allow_html=True)
     with col4:
         st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
         display_member_photo(foto_restu, "Restu Imam Fakhrezi")
-        st.markdown("<h3>Restu Imam Fakhrezi</h3><p style='font-weight: bold; color: #fbbf24;'>Spesialis Matematika</p><p style='font-size: 0.9rem;'>Algoritma optimasi, validasi matematis, pengujian</p></div>", unsafe_allow_html=True)
+        st.markdown("<h3>Restu Imam Fakhrezi</h3><p style='font-weight: bold; color: #fbbf24;'>Computational Mathematics Engineer</p><p style='font-size: 0.9rem;'>Analyzes mathematical formulations to ensure reliability and correctness. Develops optimization approaches, validates computational results, and stress-tests algorithm performance under diverse inputs.</p></div>", unsafe_allow_html=True)
 
 # ================== HALAMAN 3: ANALISIS FUNGSI ==================
 elif halaman == "📈 Analisis Fungsi":
