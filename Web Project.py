@@ -262,7 +262,7 @@ elif halaman == "👥 Anggota Tim":
             foto_luthfi = st.file_uploader("Foto Luthfi Ilham Pratama", type=['png', 'jpg', 'jpeg'], key="foto2")
         with col_upload2:
             foto_andrian = st.file_uploader("Foto Andrian Ramadhan", type=['png', 'jpg', 'jpeg'], key="foto3")
-            foto_restu = st.file_uploader("Foto Restu Imam F", type=['png', 'jpg', 'jpeg'], key="foto4")
+            foto_restu = st.file_uploader("Foto Restu Imam Fakhrezi", type=['png', 'jpg', 'jpeg'], key="foto4")
     
     st.markdown("---")
     col1, col2 = st.columns(2)
@@ -283,7 +283,7 @@ elif halaman == "👥 Anggota Tim":
         st.markdown("<h3>Andrian Ramadhan</h3><p style='font-weight: bold; color: #fbbf24;'>Spesialis Matematika</p><p style='font-size: 0.9rem;'>Algoritma optimasi, validasi matematis, pengujian</p></div>", unsafe_allow_html=True)
     with col4:
         st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
-        display_member_photo(foto_restu, "Restu Imam F")
+        display_member_photo(foto_restu, "Restu Imam Fakhrezi")
         st.markdown("<h3>Restu Imam F</h3><p style='font-weight: bold; color: #fbbf24;'>Spesialis Matematika</p><p style='font-size: 0.9rem;'>Algoritma optimasi, validasi matematis, pengujian</p></div>", unsafe_allow_html=True)
 
 # ================== HALAMAN 3: ANALISIS FUNGSI ==================
@@ -469,3 +469,4 @@ elif halaman == "🎯 Pemecah Optimasi":
                 st.info("💡 Untuk masalah kustom, silakan pilih salah satu contoh yang telah ditentukan untuk melihat format solusi.")
         else:
             st.warning("⚠️ Silakan masukkan masalah untuk diselesaikan.")
+
