@@ -85,18 +85,141 @@ section[data-testid="stSidebar"] {
 div.stMarkdown strong {
     color: #60a5fa;
 }
+
+/* Team Member Card Styles */
+.team-card {
+    background: rgba(30,41,59,0.8);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 2px solid transparent;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.team-card:hover::before {
+    opacity: 1;
+}
+
+.team-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+}
+
+.member-photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.team-card:hover .member-photo {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 35px rgba(59, 130, 246, 0.5);
+}
+
+.member-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e4e4e7;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.team-card:hover .member-name {
+    color: #60a5fa;
+}
+
+.member-role {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.member-desc {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+.role-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.role-badge:hover {
+    transform: scale(1.1);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa, #22d3ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #94a3b8;
+    font-weight: 400;
+}
 </style>
 """, unsafe_allow_html=True)
 
 # ---------------- Helper functions ----------------
-def display_member_photo(github_url, name):
-    """Display member photo from GitHub URL."""
+def display_member_card(github_url, name, role, description, border_color, role_bg):
+    """Display member card with photo and info."""
     st.markdown(f"""
-    <div style='text-align: center; margin: 20px 0;'>
-        <img src='{github_url}' 
-             style='width: 180px; height: 180px; border-radius: 50%; 
-                    object-fit: cover; border: 3px solid #3b82f6;
-                    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);'/>
+    <div class='team-card'>
+        <div style='text-align: center;'>
+            <img src='{github_url}' 
+                 class='member-photo'
+                 style='border-color: {border_color};'/>
+            <h3 class='member-name'>{name}</h3>
+            <div class='role-badge' style='background: {role_bg}; color: white;'>
+                {role}
+            </div>
+            <p class='member-desc'>{description}</p>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -167,57 +290,66 @@ if page == "🏠 Home":
 
 # ================== PAGE 2: TEAM MEMBERS ==================
 elif page == "👥 Team Members":
-    st.title("👥 Our Development Team")
-    st.markdown("### Meet the people behind this project")
+    # Header Section
+    st.markdown("""
+    <div class='section-header'>
+        <h1 class='section-title'>👥 Our Development Team</h1>
+        <p class='section-subtitle'>Meet the brilliant minds behind this project</p>
+    </div>
+    """, unsafe_allow_html=True)
     
-    st.markdown("---")
+    st.markdown("<br>", unsafe_allow_html=True)
     
     # GitHub raw URL untuk foto
     github_base_url = "https://raw.githubusercontent.com/rasyidmaulana19/RasyidClass01Night/main/Image/"
     
-    col1, col2 = st.columns(2)
+    # Team Members Row 1
+    col1, col2 = st.columns(2, gap="large")
+    
     with col1:
-        display_member_photo(f"{github_base_url}rasyid.jpeg", "Rasyid Irvan Maulana")
-        st.markdown("""
-        <div style='text-align: center; margin-top: 20px;'>
-            <h3 style='color: #e4e4e7;'>Rasyid Irvan Maulana</h3>
-            <p style='font-weight: bold; color: #60a5fa; font-size: 1rem;'>Project Lead • Backend Architect</p>
-            <p style='font-size: 0.9rem; color: #cbd5e1;'>Crafts the core system architecture and backend infrastructure that drive the entire platform.</p>
-        </div>
-        """, unsafe_allow_html=True)
+        display_member_card(
+            f"{github_base_url}rasyid.jpeg",
+            "Rasyid Irvan Maulana",
+            "🚀 Project Lead • Backend Architect",
+            "Crafts the core system architecture and backend infrastructure that drive the entire platform. Expert in designing scalable solutions and optimizing performance.",
+            "#3b82f6",
+            "linear-gradient(135deg, #3b82f6, #2563eb)"
+        )
     
     with col2:
-        display_member_photo(f"{github_base_url}luthfi.jpeg", "Luthfi Ilham Pratama")
-        st.markdown("""
-        <div style='text-align: center; margin-top: 20px;'>
-            <h3 style='color: #e4e4e7;'>Luthfi Ilham Pratama</h3>
-            <p style='font-weight: bold; color: #a78bfa; font-size: 1rem;'>Frontend Engineer • UI/UX Designer</p>
-            <p style='font-size: 0.9rem; color: #cbd5e1;'>Designs intuitive, user-centered interfaces with modern and responsive layouts.</p>
-        </div>
-        """, unsafe_allow_html=True)
+        display_member_card(
+            f"{github_base_url}luthfi.jpeg",
+            "Luthfi Ilham Pratama",
+            "🎨 Frontend Engineer • UI/UX Designer",
+            "Designs intuitive, user-centered interfaces with modern and responsive layouts. Passionate about creating seamless user experiences.",
+            "#8b5cf6",
+            "linear-gradient(135deg, #8b5cf6, #7c3aed)"
+        )
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
-    col3, col4 = st.columns(2)
+    # Team Members Row 2
+    col3, col4 = st.columns(2, gap="large")
+    
     with col3:
-        display_member_photo(f"{github_base_url}andrian.jpeg", "Andrian Ramadhan")
-        st.markdown("""
-        <div style='text-align: center; margin-top: 20px;'>
-            <h3 style='color: #e4e4e7;'>Andrian Ramadhan</h3>
-            <p style='font-weight: bold; color: #22d3ee; font-size: 1rem;'>Algorithm & Mathematics Engineer</p>
-            <p style='font-size: 0.9rem; color: #cbd5e1;'>Translates complex mathematical concepts into precise and optimized algorithms.</p>
-        </div>
-        """, unsafe_allow_html=True)
+        display_member_card(
+            f"{github_base_url}andrian.jpeg",
+            "Andrian Ramadhan",
+            "🧮 Algorithm & Mathematics Engineer",
+            "Translates complex mathematical concepts into precise and optimized algorithms. Specializes in computational efficiency and mathematical modeling.",
+            "#06b6d4",
+            "linear-gradient(135deg, #06b6d4, #0891b2)"
+        )
     
     with col4:
-        display_member_photo(f"{github_base_url}restu.jpeg", "Restu Imam Fakhrezi")
-        st.markdown("""
-        <div style='text-align: center; margin-top: 20px;'>
-            <h3 style='color: #e4e4e7;'>Restu Imam Fakhrezi</h3>
-            <p style='font-weight: bold; color: #34d399; font-size: 1rem;'>Computational Mathematics Engineer</p>
-            <p style='font-size: 0.9rem; color: #cbd5e1;'>Analyzes mathematical formulations to ensure reliability and correctness.</p>
-        </div>
-        """, unsafe_allow_html=True)
+        display_member_card(
+            f"{github_base_url}restu.jpeg",
+            "Restu Imam Fakhrezi",
+            "📐 Computational Mathematics Engineer",
+            "Analyzes mathematical formulations to ensure reliability and correctness. Focuses on numerical methods and mathematical validation.",
+            "#10b981",
+            "linear-gradient(135deg, #10b981, #059669)"
+        )
 
 # ================== PAGE 3: FUNCTION ANALYSIS ==================
 elif page == "📈 Function Analysis":
