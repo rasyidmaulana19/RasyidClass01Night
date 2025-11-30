@@ -269,7 +269,7 @@ elif halaman == "👥 Anggota Tim":
     with col1:
         st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
         display_member_photo(foto_rasyid, "Rasyid Irvan Maulana")
-        st.markdown("<h3>Rasyid Irvan Maulana</h3><p style='font-weight: bold; color: #fbbf24;'>Ketua Proyek & Pengembang Backend</p><p style='font-size: 0.9rem;'>Integrasi API, algoritma turunan, arsitektur sistem</p></div>", unsafe_allow_html=True)
+        st.markdown("<h3>Rasyid Irvan Maulana</h3><p style='font-weight: bold; color: #fbbf24;'>Project Lead • Backend Architect</p><p style='font-size: 0.9rem;'>Crafts the core system architecture and backend infrastructure that drive the entire platform.Leads API integration, develops derivative logic, and ensures all system components operate consistently and efficiently.</p></div>", unsafe_allow_html=True)
     with col2:
         st.markdown("""<div style='background: linear-gradient(...); padding: 0.5rem 1rem 2rem 1rem; border-radius: 15px; text-align: center; color: white;'>""", unsafe_allow_html=True)
         display_member_photo(foto_luthfi, "Luthfi Ilham Pratama")
