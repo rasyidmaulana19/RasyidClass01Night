@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import sympy as sp
 from sympy import symbols, diff, latex, sympify, simplify
 import plotly.graph_objects as go
-from PIL import Image
+from PIL import Image, ImageDraw
 import io
 import base64
 
@@ -134,15 +134,52 @@ def display_member_photo(uploaded_file, name):
             if hasattr(uploaded_file, "seek"):
                 uploaded_file.seek(0)
             image = Image.open(uploaded_file)
+            
+            # Convert ke RGB jika perlu
+            if image.mode != 'RGB':
+                image = image.convert('RGB')
+            
+            # Buat gambar berbentuk lingkaran
+            size = min(image.size)
+            image = image.crop(((image.width - size) // 2, 
+                               (image.height - size) // 2,
+                               (image.width + size) // 2, 
+                               (image.height + size) // 2))
+            
+            # Resize
             image.thumbnail((300, 300))
-            st.image(image, caption=name, use_container_width=True)
+            
+            # Buat mask lingkaran
+            mask = Image.new('L', image.size, 0)
+            draw = ImageDraw.Draw(mask)
+            draw.ellipse((0, 0) + image.size, fill=255)
+            
+            # Terapkan mask
+            output = Image.new('RGBA', image.size, (0, 0, 0, 0))
+            output.paste(image, (0, 0))
+            output.putalpha(mask)
+            
+            # Convert ke base64 untuk display dengan CSS
+            buffered = io.BytesIO()
+            output.save(buffered, format="PNG")
+            img_str = base64.b64encode(buffered.getvalue()).decode()
+            
+            st.markdown(f"""
+            <div style='text-align: center; margin: 20px 0;'>
+                <img src='data:image/png;base64,{img_str}' 
+                     style='width: 200px; height: 200px; border-radius: 50%; 
+                            object-fit: cover; border: 4px solid rgba(255,255,255,0.3);
+                            box-shadow: 0 8px 25px rgba(0,0,0,0.3);'/>
+            </div>
+            """, unsafe_allow_html=True)
         except Exception as e:
             st.error(f"Gagal menampilkan gambar {name}: {e}")
     else:
         st.markdown(f"""
         <div style='width: 200px; height: 200px; background: linear-gradient(135deg, #667eea, #764ba2); 
                     border-radius: 50%; margin: 0 auto; display: flex; align-items: center; 
-                    justify-content: center; font-size: 4rem;'>
+                    justify-content: center; font-size: 4rem; border: 4px solid rgba(255,255,255,0.3);
+                    box-shadow: 0 8px 25px rgba(0,0,0,0.3);'>
             👤
         </div>
         """, unsafe_allow_html=True)
