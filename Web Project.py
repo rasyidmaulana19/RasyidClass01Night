@@ -173,7 +173,7 @@ elif page == "👥 Team Members":
     st.markdown("---")
     
     # GitHub raw URL untuk foto
-    github_base_url = "https://raw.githubusercontent.com/rasyidmaulana19/RasyidClass01Night/main/image/"
+    github_base_url = "https://raw.githubusercontent.com/rasyidmaulana19/RasyidClass01Night/main/Image/"
     
     col1, col2 = st.columns(2)
     with col1:
