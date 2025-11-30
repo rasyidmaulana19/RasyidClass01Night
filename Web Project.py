@@ -214,9 +214,12 @@ def display_member_card(github_url, name, role, description, border_color, role_
     st.markdown(f"""
     <div class='team-card'>
         <div style='text-align: center;'>
-            <img src='{github_url}' 
-                 class='member-photo'
-                 style='border-color: {border_color};'/>
+            <div style='width: 200px; height: 200px; margin: 0 auto; border-radius: 50%; overflow: hidden; border: 4px solid {border_color}; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); position: relative;'>
+                <img src='{github_url}' 
+                     style='width: 100%; height: 100%; object-fit: cover; object-position: center center; transition: all 0.4s ease; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);'
+                     onmouseover="this.style.transform='translate(-50%, -50%) scale(1.1) rotate(5deg)'"
+                     onmouseout="this.style.transform='translate(-50%, -50%) scale(1) rotate(0deg)'"/>
+            </div>
             <h3 class='member-name'>{name}</h3>
             <div class='role-badge' style='background: {role_bg}; color: white;'>
                 {role}
