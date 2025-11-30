@@ -305,7 +305,7 @@ if page == "🏠 Home":
                 padding: 2rem; border-radius: 20px; border: 2px solid rgba(59, 130, 246, 0.3);
                 margin-bottom: 2rem;'>
         <h2 style='color: #60a5fa; text-align: center; font-size: 2rem; margin-bottom: 1rem;'>
-            📐 Apa itu Turunan (Derivative)?
+            📐 What is a Derivative?
         </h2>
     </div>
     """, unsafe_allow_html=True)
@@ -316,14 +316,14 @@ if page == "🏠 Home":
         st.markdown("""
         <div style='background: rgba(30,41,59,0.8); padding: 1.5rem; border-radius: 15px; 
                     border-left: 4px solid #3b82f6; height: 100%;'>
-            <h3 style='color: #60a5fa; margin-bottom: 1rem;'>📖 Definisi</h3>
+            <h3 style='color: #60a5fa; margin-bottom: 1rem;'>📖 Definition</h3>
             <p style='color: #cbd5e1; line-height: 1.8; font-size: 1rem;'>
-                Turunan adalah <strong style='color: #60a5fa;'>laju perubahan suatu fungsi</strong> terhadap variabelnya. 
-                Secara geometris, turunan merepresentasikan <strong style='color: #60a5fa;'>kemiringan garis singgung</strong> 
-                pada suatu titik di kurva fungsi.
+                A derivative represents the <strong style='color: #60a5fa;'>rate of change</strong> of a function 
+                with respect to its variable. Geometrically, it represents the <strong style='color: #60a5fa;'>slope 
+                of the tangent line</strong> at a point on the function's curve.
             </p>
             <p style='color: #94a3b8; font-style: italic; margin-top: 1rem;'>
-                💡 Turunan menjawab pertanyaan: "Seberapa cepat fungsi berubah pada titik tertentu?"
+                💡 The derivative answers: "How fast is the function changing at a specific point?"
             </p>
         </div>
         """, unsafe_allow_html=True)
@@ -332,16 +332,16 @@ if page == "🏠 Home":
         st.markdown("""
         <div style='background: rgba(30,41,59,0.8); padding: 1.5rem; border-radius: 15px; 
                     border-left: 4px solid #8b5cf6; height: 100%;'>
-            <h3 style='color: #a78bfa; margin-bottom: 1rem;'>🧮 Definisi Matematis</h3>
+            <h3 style='color: #a78bfa; margin-bottom: 1rem;'>🧮 Mathematical Definition</h3>
             <p style='color: #cbd5e1; line-height: 1.8;'>
-                Turunan fungsi f(x) didefinisikan sebagai limit:
+                The derivative of function f(x) is defined as the limit:
             </p>
         </div>
         """, unsafe_allow_html=True)
         st.latex(r"f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}")
         st.markdown("""
         <p style='color: #94a3b8; text-align: center; margin-top: 0.5rem;'>
-            atau dapat ditulis sebagai:
+            or can be written as:
         </p>
         """, unsafe_allow_html=True)
         st.latex(r"\frac{dy}{dx} = \lim_{\Delta x \to 0} \frac{\Delta y}{\Delta x}")
@@ -354,7 +354,7 @@ if page == "🏠 Home":
                 padding: 2rem; border-radius: 20px; border: 2px solid rgba(139, 92, 246, 0.3);
                 margin-bottom: 2rem;'>
         <h2 style='color: #a78bfa; text-align: center; font-size: 2rem; margin-bottom: 1rem;'>
-            📝 Rumus-Rumus Turunan
+            📝 Derivative Formulas
         </h2>
     </div>
     """, unsafe_allow_html=True)
@@ -364,42 +364,42 @@ if page == "🏠 Home":
     with col_rule1:
         st.markdown("""
         <div style='background: rgba(30,41,59,0.8); padding: 1.5rem; border-radius: 15px; 
-                    border: 2px solid rgba(59, 130, 246, 0.3); min-height: 280px;'>
-            <h4 style='color: #60a5fa; text-align: center; margin-bottom: 1rem;'>⚡ Aturan Dasar</h4>
+                    border: 2px solid rgba(59, 130, 246, 0.3); min-height: 320px;'>
+            <h4 style='color: #60a5fa; text-align: center; margin-bottom: 1.5rem;'>⚡ Basic Rules</h4>
         </div>
         """, unsafe_allow_html=True)
         st.latex(r"\frac{d}{dx}(c) = 0")
-        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>Konstanta</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;'>Constant</p>", unsafe_allow_html=True)
         st.latex(r"\frac{d}{dx}(x^n) = nx^{n-1}")
-        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>Power Rule</p>", unsafe_allow_html=True)
-        st.latex(r"\frac{d}{dx}(cf(x)) = c \cdot f'(x)")
+        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;'>Power Rule</p>", unsafe_allow_html=True)
+        st.latex(r"\frac{d}{dx}\left(cf(x)\right) = c \cdot f'(x)")
         st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>Constant Multiple</p>", unsafe_allow_html=True)
     
     with col_rule2:
         st.markdown("""
         <div style='background: rgba(30,41,59,0.8); padding: 1.5rem; border-radius: 15px; 
-                    border: 2px solid rgba(139, 92, 246, 0.3); min-height: 280px;'>
-            <h4 style='color: #a78bfa; text-align: center; margin-bottom: 1rem;'>🔄 Trigonometri</h4>
+                    border: 2px solid rgba(139, 92, 246, 0.3); min-height: 320px;'>
+            <h4 style='color: #a78bfa; text-align: center; margin-bottom: 1.5rem;'>🔄 Trigonometry</h4>
         </div>
         """, unsafe_allow_html=True)
         st.latex(r"\frac{d}{dx}(\sin x) = \cos x")
-        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>Sinus</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;'>Sine</p>", unsafe_allow_html=True)
         st.latex(r"\frac{d}{dx}(\cos x) = -\sin x")
-        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>Cosinus</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;'>Cosine</p>", unsafe_allow_html=True)
         st.latex(r"\frac{d}{dx}(\tan x) = \sec^2 x")
-        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>Tangen</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>Tangent</p>", unsafe_allow_html=True)
     
     with col_rule3:
         st.markdown("""
         <div style='background: rgba(30,41,59,0.8); padding: 1.5rem; border-radius: 15px; 
-                    border: 2px solid rgba(6, 182, 212, 0.3); min-height: 280px;'>
-            <h4 style='color: #22d3ee; text-align: center; margin-bottom: 1rem;'>📈 Eksponensial & Log</h4>
+                    border: 2px solid rgba(6, 182, 212, 0.3); min-height: 320px;'>
+            <h4 style='color: #22d3ee; text-align: center; margin-bottom: 1.5rem;'>📈 Exponential & Log</h4>
         </div>
         """, unsafe_allow_html=True)
         st.latex(r"\frac{d}{dx}(e^x) = e^x")
-        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>Exponential</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;'>Exponential</p>", unsafe_allow_html=True)
         st.latex(r"\frac{d}{dx}(\ln x) = \frac{1}{x}")
-        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>Natural Log</p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem; margin-bottom: 1rem;'>Natural Log</p>", unsafe_allow_html=True)
         st.latex(r"\frac{d}{dx}(a^x) = a^x \ln a")
         st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 0.85rem;'>General Exponential</p>", unsafe_allow_html=True)
     
@@ -411,7 +411,7 @@ if page == "🏠 Home":
                 padding: 2rem; border-radius: 20px; border: 2px solid rgba(6, 182, 212, 0.3);
                 margin-bottom: 2rem;'>
         <h2 style='color: #22d3ee; text-align: center; font-size: 2rem; margin-bottom: 1rem;'>
-            🔧 Aplikasi Turunan dalam Dunia Teknik
+            🔧 Applications of Derivatives in Engineering
         </h2>
     </div>
     """, unsafe_allow_html=True)
@@ -419,43 +419,43 @@ if page == "🏠 Home":
     applications = [
         {
             "icon": "🚗",
-            "title": "Teknik Mesin & Otomotif",
-            "desc": "Menghitung kecepatan dan akselerasi kendaraan, mengoptimalkan efisiensi mesin, dan mendesain sistem transmisi.",
+            "title": "Mechanical & Automotive Engineering",
+            "desc": "Calculate vehicle velocity and acceleration, optimize engine efficiency, and design transmission systems.",
             "formula": r"v(t) = \frac{ds}{dt}, \quad a(t) = \frac{dv}{dt}",
             "color": "#3b82f6"
         },
         {
             "icon": "⚡",
-            "title": "Teknik Elektro",
-            "desc": "Menganalisis arus listrik, tegangan pada rangkaian, dan mendesain filter elektronik dengan respons frekuensi optimal.",
+            "title": "Electrical Engineering",
+            "desc": "Analyze electrical current, circuit voltage, and design electronic filters with optimal frequency response.",
             "formula": r"i(t) = \frac{dq}{dt}, \quad v(t) = L\frac{di}{dt}",
             "color": "#8b5cf6"
         },
         {
             "icon": "🏗️",
-            "title": "Teknik Sipil",
-            "desc": "Menghitung gaya maksimum pada struktur, optimasi bentuk jembatan, dan analisis defleksi balok.",
+            "title": "Civil Engineering",
+            "desc": "Calculate maximum forces on structures, optimize bridge shapes, and analyze beam deflection.",
             "formula": r"M = -EI\frac{d^2y}{dx^2}",
             "color": "#06b6d4"
         },
         {
             "icon": "🏭",
-            "title": "Teknik Kimia & Proses",
-            "desc": "Menentukan laju reaksi kimia, mengoptimalkan produksi, dan mengontrol suhu pada reaktor.",
+            "title": "Chemical & Process Engineering",
+            "desc": "Determine chemical reaction rates, optimize production, and control reactor temperature.",
             "formula": r"r = -\frac{dC}{dt} = kC^n",
             "color": "#10b981"
         },
         {
             "icon": "✈️",
-            "title": "Teknik Aerospace",
-            "desc": "Menghitung gaya angkat pesawat, optimasi bentuk sayap, dan analisis trajektori penerbangan.",
+            "title": "Aerospace Engineering",
+            "desc": "Calculate aircraft lift force, optimize wing shape, and analyze flight trajectory.",
             "formula": r"F_L = \frac{1}{2}\rho v^2 C_L A",
             "color": "#f59e0b"
         },
         {
             "icon": "🤖",
-            "title": "Robotika & AI",
-            "desc": "Gradient descent untuk machine learning, path planning robot, dan kontrol motor servo.",
+            "title": "Robotics & AI",
+            "desc": "Gradient descent for machine learning, robot path planning, and servo motor control.",
             "formula": r"\theta_{new} = \theta_{old} - \alpha \frac{\partial J}{\partial \theta}",
             "color": "#ec4899"
         }
@@ -485,7 +485,7 @@ if page == "🏠 Home":
     st.markdown("""
     <div style='background: rgba(30,41,59,0.6); padding: 2rem; border-radius: 15px; 
                 border: 1px solid rgba(59, 130, 246, 0.3);'>
-        <h3 style='color: #60a5fa; margin-bottom: 1.5rem;'>🚀 Fitur Aplikasi</h3>
+        <h3 style='color: #60a5fa; margin-bottom: 1.5rem;'>🚀 Application Features</h3>
     </div>
     """, unsafe_allow_html=True)
     
@@ -493,15 +493,15 @@ if page == "🏠 Home":
     with features_col1:
         st.markdown("""
         <ul style='color: #cbd5e1; line-height: 2; font-size: 1rem;'>
-            <li>✅ <strong style='color: #60a5fa;'>Function Visualization</strong>: Plot fungsi matematika apapun</li>
-            <li>✅ <strong style='color: #60a5fa;'>Derivative Computation</strong>: Hitung turunan step-by-step dengan LaTeX</li>
+            <li>✅ <strong style='color: #60a5fa;'>Function Visualization</strong>: Plot any mathematical function</li>
+            <li>✅ <strong style='color: #60a5fa;'>Derivative Computation</strong>: Calculate derivatives step-by-step with LaTeX</li>
         </ul>
         """, unsafe_allow_html=True)
     with features_col2:
         st.markdown("""
         <ul style='color: #cbd5e1; line-height: 2; font-size: 1rem;'>
-            <li>✅ <strong style='color: #60a5fa;'>Optimization Solver</strong>: Selesaikan masalah optimasi dunia nyata</li>
-            <li>✅ <strong style='color: #60a5fa;'>Interactive Plots</strong>: Visualisasi dinamis dan responsif</li>
+            <li>✅ <strong style='color: #60a5fa;'>Optimization Solver</strong>: Solve real-world optimization problems</li>
+            <li>✅ <strong style='color: #60a5fa;'>Interactive Plots</strong>: Dynamic and responsive visualizations</li>
         </ul>
         """, unsafe_allow_html=True)
 
